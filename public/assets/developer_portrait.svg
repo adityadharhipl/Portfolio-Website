@@ -1,0 +1,47 @@
+<svg width="1024" height="1280" viewBox="0 0 1024 1280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="150" y1="120" x2="900" y2="1180" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2A2D34"/>
+      <stop offset="1" stop-color="#0C0E12"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(760 260) rotate(90) scale(220 220)">
+      <stop stop-color="#8B5CF6" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(310 820) rotate(90) scale(420 420)">
+      <stop stop-color="#D45C3D" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#D45C3D" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shirt" x1="520" y1="680" x2="520" y2="1230" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#DDE8F7"/>
+      <stop offset="1" stop-color="#8CA6C4"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="490" y1="260" x2="540" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6D3B5"/>
+      <stop offset="1" stop-color="#D7A88A"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="460" y1="150" x2="560" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2A2A2D"/>
+      <stop offset="1" stop-color="#111115"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1280" rx="40" fill="url(#bg)"/>
+  <rect x="120" y="140" width="784" height="1000" rx="340" fill="url(#glow1)"/>
+  <rect x="40" y="690" width="840" height="540" rx="270" fill="url(#glow2)"/>
+  <g opacity=".22" stroke="#FFFFFF">
+    <path d="M94 120h836M94 220h836M94 320h836M94 420h836M94 520h836M94 620h836M94 720h836M94 820h836" />
+  </g>
+  <ellipse cx="512" cy="472" rx="175" ry="205" fill="url(#skin)"/>
+  <path d="M342 540c24-140 72-258 170-258s146 108 170 258c-54 44-120 68-170 68s-116-24-170-68Z" fill="url(#hair)"/>
+  <path d="M372 534c22-90 56-160 140-160 83 0 115 66 140 160 10 38-9 81-46 98-34 16-70 24-94 24s-60-8-94-24c-37-17-56-60-46-98Z" fill="url(#skin)"/>
+  <path d="M430 510c24-18 46-26 82-26s58 8 82 26c-10 30-30 46-50 54-14 6-20 4-32 4s-18 2-32-4c-20-8-40-24-50-54Z" fill="#EAC0A1" opacity=".7"/>
+  <path d="M424 594c28-8 52-10 88-10s60 2 88 10c40 11 66 42 66 84v328H358V678c0-42 26-73 66-84Z" fill="url(#shirt)"/>
+  <path d="M448 635c16 10 38 18 64 18s48-8 64-18c10 22 28 40 52 50-28 38-75 70-116 70s-88-32-116-70c24-10 42-28 52-50Z" fill="#F4F7FB"/>
+  <path d="M420 742c20 18 52 30 92 30s72-12 92-30c30 42 52 98 52 190v180H368V932c0-92 22-148 52-190Z" fill="#D7E0EC"/>
+  <path d="M352 1130h320c0-74-12-146-40-190-26-42-75-66-120-66s-94 24-120 66c-28 44-40 116-40 190Z" fill="#0F1319"/>
+  <path d="M384 1110h256" stroke="#425167" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="432" cy="482" r="14" fill="#1D1D1F"/>
+  <circle cx="592" cy="482" r="14" fill="#1D1D1F"/>
+  <path d="M457 550c18 14 92 14 110 0" stroke="#C87C63" stroke-width="10" stroke-linecap="round"/>
+  <path d="M276 956c22-54 52-102 88-136 18-17 42-27 68-27h164c26 0 50 10 68 27 36 34 66 82 88 136" stroke="#FFFFFF" stroke-opacity=".08" stroke-width="14" stroke-linecap="round"/>
+</svg>

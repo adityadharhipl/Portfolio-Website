@@ -1,0 +1,22 @@
+<svg width="1600" height="700" viewBox="0 0 1600 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="800" y1="0" x2="800" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2B3340"/>
+      <stop offset="1" stop-color="#0D1017"/>
+    </linearGradient>
+    <radialGradient id="moon" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1200 170) rotate(90) scale(130 130)">
+      <stop stop-color="#FFFFFF" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="700" fill="url(#sky)"/>
+  <circle cx="1200" cy="170" r="130" fill="url(#moon)"/>
+  <g opacity=".45" stroke="#FFFFFF">
+    <path d="M70 100h1460M70 200h1460M70 300h1460M70 400h1460" stroke-opacity=".08"/>
+  </g>
+  <path d="M0 640 300 350 530 470 760 230 1040 420 1270 280 1600 610V700H0V640Z" fill="#151B23"/>
+  <path d="M0 700 210 490 440 620 700 400 980 550 1220 390 1600 680V700H0Z" fill="#10141B"/>
+  <path d="M0 700 180 610 370 650 620 500 840 620 1080 470 1320 610 1600 560V700H0Z" fill="#0A0D12"/>
+  <path d="M230 420 300 350 530 470 620 390 700 400 760 230 820 350 1040 420 1130 330 1270 280 1360 360" stroke="#8B5CF6" stroke-opacity=".18" stroke-width="3"/>
+  <path d="M0 655C220 640 410 676 620 645s300-35 450-10 305 26 530-15v70H0v-55Z" fill="#07080B"/>
+</svg>

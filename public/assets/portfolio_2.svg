@@ -1,0 +1,18 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 420) rotate(90) scale(540 540)">
+      <stop stop-color="#24142D"/>
+      <stop offset="1" stop-color="#07070A"/>
+    </radialGradient>
+    <linearGradient id="textGlow" x1="180" y1="260" x2="1020" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E9D5FF"/>
+      <stop offset="0.5" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#6D28D9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" rx="36" fill="url(#bg2)"/>
+  <ellipse cx="600" cy="650" rx="390" ry="110" fill="#A855F7" fill-opacity=".08"/>
+  <text x="600" y="470" text-anchor="middle" fill="url(#textGlow)" font-size="116" font-weight="300" letter-spacing="0.02em" font-family="Arial, Helvetica, sans-serif">eatome.</text>
+  <text x="600" y="548" text-anchor="middle" fill="#FFFFFF" fill-opacity=".45" font-size="22" font-weight="600" letter-spacing="0.5em" font-family="Arial, Helvetica, sans-serif">THIN TYPE STUDY</text>
+  <path d="M160 235h880M160 665h880" stroke="#FFFFFF" stroke-opacity=".08"/>
+</svg>

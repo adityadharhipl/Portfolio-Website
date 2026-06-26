@@ -1,0 +1,26 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg3" x1="140" y1="40" x2="1060" y2="860" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F1218"/>
+      <stop offset="1" stop-color="#050507"/>
+    </linearGradient>
+    <linearGradient id="car" x1="360" y1="460" x2="840" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2B3038"/>
+      <stop offset="1" stop-color="#0F1116"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" rx="36" fill="url(#bg3)"/>
+  <circle cx="980" cy="180" r="38" fill="#F8FAFC" fill-opacity=".12"/>
+  <circle cx="940" cy="220" r="10" fill="#F8FAFC" fill-opacity=".4"/>
+  <circle cx="1020" cy="250" r="12" fill="#F8FAFC" fill-opacity=".18"/>
+  <path d="M120 680c120-100 220-100 320-120 120-24 190-70 300-70 110 0 170 46 250 70 70 20 120 20 200 120" stroke="#7C3AED" stroke-opacity=".12" stroke-width="2"/>
+  <path d="M260 570c130-60 300-70 420-70 110 0 210 20 320 70" stroke="#FFFFFF" stroke-opacity=".08" stroke-width="2"/>
+  <path d="M325 550h550c40 0 74 22 87 56l36 94H270l18-63c10-54 30-87 37-87Z" fill="url(#car)"/>
+  <path d="M430 495h272c22 0 40 14 48 34l16 40H386l18-34c12-22 26-40 26-40Z" fill="#1B1F26"/>
+  <path d="M390 560h420l40 120H350l40-120Z" fill="#11141A"/>
+  <rect x="448" y="522" width="300" height="64" rx="30" fill="#0B0D10"/>
+  <path d="M310 696h584" stroke="#D45C3D" stroke-opacity=".36" stroke-width="8" stroke-linecap="round"/>
+  <path d="M280 740h640" stroke="#FFFFFF" stroke-opacity=".05" stroke-width="2"/>
+  <circle cx="430" cy="688" r="42" fill="#07080B" stroke="#8B5CF6" stroke-opacity=".28" stroke-width="8"/>
+  <circle cx="770" cy="688" r="42" fill="#07080B" stroke="#8B5CF6" stroke-opacity=".28" stroke-width="8"/>
+</svg>
