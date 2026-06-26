@@ -54,25 +54,16 @@ export function HeroSection() {
 
                   <div className="float relative w-full max-w-[32rem] self-end">
                     <div className="absolute -inset-3 rounded-[2rem] bg-[linear-gradient(135deg,rgba(255,255,255,0.18),transparent)] blur-2xl" />
-                    <div className="relative aspect-[16/10] min-h-[20rem] overflow-hidden rounded-[2rem] border border-white/10 bg-[#11141b] shadow-[0_30px_70px_rgba(0,0,0,0.45)]">
+                    <div className="relative aspect-[4/5] min-h-[20rem] overflow-hidden rounded-[2rem] border border-white/10 bg-[#11141b] shadow-[0_30px_70px_rgba(0,0,0,0.45)]">
                       <Image
                         src="/assets/portfolio_3-v2.jpg"
                         alt="Portrait of Aditya Dhar Dwivedi"
                         width={800}
                         height={960}
                         sizes="(max-width: 1024px) 100vw, 560px"
-                        className="h-auto w-full object-cover object-[center_18%]"
+                        className="h-full w-full object-cover object-top"
                         priority
                       />
-                      {/* <Image
-                      src="/assets/portfolio_3-v2.jpg"
-                      alt="Portrait of Aditya Dhar Dwivedi"
-                      width={800}
-                      height={960}
-                      sizes="(max-width: 1024px) 100vw, 560px"
-                      className="h-auto w-full object-cover object-[center_18%]"
-                      priority
-                    /> */}
                     </div>
                   </div>
 

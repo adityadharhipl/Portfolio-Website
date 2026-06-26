@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { site, services, skillGroups, portfolioProjects, SkillTag, UnderlineField } from "./shared";
+import { site, services, skillGroups, portfolioProjects, SkillTag, UnderlineField, Project } from "./shared";
+import { ProjectModal } from "./ProjectModal";
 
 interface MobileAppViewProps {
   onBackToWeb?: () => void;
@@ -15,6 +16,7 @@ export function MobileAppView({ onBackToWeb }: MobileAppViewProps) {
   
   // Custom dialog notifications
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   // Form submission state
   const [submitted, setSubmitted] = useState(false);
@@ -393,7 +395,7 @@ export function MobileAppView({ onBackToWeb }: MobileAppViewProps) {
               {filteredProjects.map((project, index) => (
                 <article
                   key={project.title}
-                  onClick={() => showToast(`Opening project: ${project.title}`)}
+                  onClick={() => setSelectedProject(project)}
                   className="group rounded-2xl border border-white/8 bg-white/2 overflow-hidden shadow-md active:scale-[0.98] transition duration-200 cursor-pointer"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden bg-black/40">
@@ -511,6 +513,13 @@ export function MobileAppView({ onBackToWeb }: MobileAppViewProps) {
         ))}
       </footer>
 
+      {/* Project Modal */}
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
     </div>
   );
 }

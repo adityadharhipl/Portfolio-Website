@@ -23,8 +23,7 @@ export function AboutMeSection() {
                 <WaveDivider />
               </div>
               <p className="mt-6 text-base leading-8 text-[var(--ink-soft)]">
-                I care about readability, responsiveness, and the small cues that make an interface
-                feel polished. Design systems, component structure, and subtle hover states all matter.
+                I specialize in creating robust, data-dense applications. As an <strong>Admin Panel Expert with MUI</strong> (Material-UI), I care about readability, responsiveness, and structuring complex workflows into intuitive, polished interfaces.
               </p>
             </div>
           </div>

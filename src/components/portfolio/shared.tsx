@@ -119,13 +119,57 @@ export const skillGroups: Array<{ title: string; items: SkillItem[] }> = [
   },
 ];
 
-export const portfolioProjects = [
-  { title: "Neon Grid", category: "CODED", image: "/assets/portfolio_1.svg" },
-  { title: "eatome.", category: "DESIGNED", image: "/assets/portfolio_2.svg" },
-  { title: "Night Drive", category: "CODED", image: "/assets/portfolio_3-v2.jpg" },
-  { title: "Orbit", category: "DESIGNED", image: "/assets/portfolio_4.svg" },
-  { title: "Signal", category: "CODED", image: "/assets/portfolio_5.svg" },
-  { title: "Neural UI", category: "DESIGNED", image: "/assets/portfolio_6.svg" },
+export type Project = {
+  title: string;
+  category: string;
+  image: string;
+  url?: string;
+  description?: string;
+  techStack?: string[];
+};
+
+export const portfolioProjects: Project[] = [
+  { 
+    title: "Navo Ergonomics", 
+    category: "E-COMMERCE", 
+    image: "/assets/portfolio_1.svg",
+    // url: "https://navoergonomics.com/ergonomic-office-chairs/aero-chair-mesh/?aero-chair-color-option=GREY",
+    description: "A modern, high-performance e-commerce platform for ergonomic office chairs, featuring complex product variants, fluid navigation, and an optimized checkout experience.",
+    techStack: ["Next.js", "React", "Tailwind CSS", "E-commerce APIs"]
+  },
+  { 
+    title: "Kyle Dev Real Estate", 
+    category: "REAL ESTATE", 
+    image: "/assets/portfolio_2.svg",
+    // url: "https://kyle-dev-react.hipl-staging3.com/",
+    description: "A dynamic real estate property listing application. Includes advanced search filters, interactive property galleries, and detailed property pages designed for conversion.",
+    techStack: ["React.js", "Vite", "CSS Modules", "REST APIs"]
+  },
+  { 
+    title: "VedVidhi Astrology", 
+    category: "ASTROLOGY", 
+    image: "/assets/portfolio_3.svg",
+    // url: "https://vedvidhi.com/",
+    description: "A comprehensive astrology platform providing daily insights, personalized horoscopes, and expert consultations. Built for scale with server-side rendering for top-tier SEO.",
+    techStack: ["Next.js", "React", "Node.js", "Tailwind CSS"]
+  },
+  { 
+    title: "MERN Chat App", 
+    category: "MESSAGING", 
+    image: "/assets/portfolio_4.svg",
+    // url: "https://chatapp-mern-7xk2.vercel.app/",
+    description: "A full-stack real-time messaging application. Features include live typing indicators, user authentication, online status tracking, and instant message delivery.",
+    techStack: ["MongoDB", "Express.js", "React.js", "Node.js", "Socket.io"]
+  },
+  { 
+    title: "Dyan.co Restaurant", 
+    category: "HOSPITALITY", 
+    image: "/assets/portfolio_5.svg",
+    // url: "https://dyan.co/",
+    description: "A premium restaurant website featuring an elegant menu display, seamless online reservations, and a visually immersive dining experience preview.",
+    techStack: ["React.js", "Tailwind CSS", "Node.js"]
+  },
+  { title: "Neural Dashboard", category: "DESIGNED", image: "/assets/portfolio_6.svg" },
 ];
 
 export const footerLinks: SocialLink[] = [
