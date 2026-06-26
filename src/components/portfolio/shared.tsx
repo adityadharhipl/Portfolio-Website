@@ -34,7 +34,7 @@ export type SkillItem =
     };
 
 export const socialLinks: SocialLink[] = [
-  { label: "Email", href: "mailto:hello@adityadhar.dev", icon: EmailIcon },
+  { label: "Email", href: "mailto:adityadhar.hipl@gmail.com", icon: EmailIcon },
   { label: "GitHub", href: "https://github.com/adityadharhipl", icon: GitHubIcon },
   {
     label: "LinkedIn",
@@ -129,7 +129,7 @@ export const portfolioProjects = [
 ];
 
 export const footerLinks: SocialLink[] = [
-  { label: "Email", href: "mailto:hello@adityadhar.dev", icon: EmailIcon },
+  { label: "Email", href: "mailto:adityadhar.hipl@gmail.com", icon: EmailIcon },
   { label: "GitHub", href: "https://github.com/adityadharhipl", icon: GitHubIcon },
   {
     label: "LinkedIn",
@@ -198,12 +198,13 @@ export function UnderlineField({
   type,
   placeholder,
   multiline = false,
+  ...rest
 }: {
   label: string;
   type: string;
   placeholder: string;
   multiline?: boolean;
-}) {
+} & React.InputHTMLAttributes<HTMLInputElement> & React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return (
     <label className="grid gap-2">
       <span className="text-xs font-black uppercase tracking-[0.36em] text-[rgba(18,18,18,0.54)]">
@@ -214,12 +215,14 @@ export function UnderlineField({
           placeholder={placeholder}
           rows={4}
           className="border-b border-[rgba(18,18,18,0.16)] bg-transparent px-0 py-3 text-base text-[var(--foreground)] outline-none transition placeholder:text-[rgba(18,18,18,0.34)] focus:border-[var(--foreground)]"
+          {...rest}
         />
       ) : (
         <input
           type={type}
           placeholder={placeholder}
           className="border-b border-[rgba(18,18,18,0.16)] bg-transparent px-0 py-3 text-base text-[var(--foreground)] outline-none transition placeholder:text-[rgba(18,18,18,0.34)] focus:border-[var(--foreground)]"
+          {...rest}
         />
       )}
     </label>

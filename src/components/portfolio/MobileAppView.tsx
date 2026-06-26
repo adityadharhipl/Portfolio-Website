@@ -90,7 +90,7 @@ export function MobileAppView({ onBackToWeb }: MobileAppViewProps) {
         {/* Hamburger Icon */}
         <button
           onClick={() => setMenuOpen(true)}
-          className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/5 transition"
+          className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/5 transition text-white"
           aria-label="Open navigation drawer"
         >
           <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
@@ -112,7 +112,7 @@ export function MobileAppView({ onBackToWeb }: MobileAppViewProps) {
 
             <button
               onClick={() => setMenuOpen(false)}
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition border border-white/10"
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition border border-white/10 text-white"
               aria-label="Close navigation drawer"
             >
               <svg viewBox="0 0 24 24" className="w-5 h-5 text-white/80" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -159,7 +159,7 @@ export function MobileAppView({ onBackToWeb }: MobileAppViewProps) {
           {/* Drawer Bottom: Social/Footer Info */}
           <div className="flex flex-col items-center gap-4 text-center pb-4 text-white/50 text-[10px] font-black uppercase tracking-[0.2em]">
             <div className="flex items-center gap-4">
-              <a href="mailto:hello@adityadhar.dev" className="hover:text-white transition">Email</a>
+              <a href="mailto:adityadhar.hipl@gmail.com" className="hover:text-white transition">Email</a>
               <span>•</span>
               <a href="https://github.com/adityadharhipl" target="_blank" rel="noreferrer" className="hover:text-white transition">GitHub</a>
               <span>•</span>
@@ -216,7 +216,7 @@ export function MobileAppView({ onBackToWeb }: MobileAppViewProps) {
               <div className="flex flex-col gap-3 shrink-0">
                 {/* Email Action */}
                 <a
-                  href="mailto:hello@adityadhar.dev"
+                  href="mailto:adityadhar.hipl@gmail.com"
                   onClick={() => showToast("Opening mail composer...")}
                   className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all border border-white/15 hover:shadow-lg active:scale-95"
                   title="Send Email"
