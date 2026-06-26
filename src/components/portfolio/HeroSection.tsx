@@ -58,7 +58,8 @@ export function HeroSection() {
                     <Image
                       src="/assets/portfolio_3-v2.jpg"
                       alt="Portrait of Aditya Dhar Dwivedi"
-                      fill
+                      width={800}
+                      height={960}
                       sizes="(max-width: 1024px) 100vw, 520px"
                       className="object-contain object-center"
                       priority
