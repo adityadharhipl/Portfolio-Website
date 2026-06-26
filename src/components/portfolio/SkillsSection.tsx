@@ -7,7 +7,7 @@ export function SkillsSection() {
         <div className="section-card rounded-[2rem] bg-[rgba(255,255,255,0.5)] px-6 py-10 sm:px-10 lg:px-14 lg:py-14">
           <SectionHeader title="SKILLS" />
 
-          <div className="mt-10 grid gap-8 lg:grid-cols-3">
+          <div className="mt-10 grid gap-8 lg:grid-cols-2 xl:grid-cols-4">
             {skillGroups.map((group) => (
               <div
                 key={group.title}

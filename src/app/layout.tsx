@@ -4,7 +4,7 @@ import { PwaRegistration } from "@/components/pwa-registration";
 
 export const metadata: Metadata = {
   title: "Aditya Dhar Dwivedi | Portfolio",
-  description: "A static portfolio landing page for Aditya Dhar Dwivedi, MERN Stack Developer and Express.js Developer.",
+  description: "A  portfolio landing page for Aditya Dhar Dwivedi, MERN Stack Developer and Express.js Developer.",
   manifest: "/manifest.webmanifest",
 };
 

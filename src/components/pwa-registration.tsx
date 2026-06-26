@@ -8,6 +8,15 @@ export function PwaRegistration() {
       return;
     }
 
+    if (process.env.NODE_ENV !== "production") {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        registrations.forEach((registration) => {
+          registration.unregister();
+        });
+      });
+      return;
+    }
+
     navigator.serviceWorker.register("/sw.js").catch(() => {
       // Quietly ignore registration failures in unsupported or local setups.
     });

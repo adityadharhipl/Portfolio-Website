@@ -3,6 +3,7 @@ import { site, socialLinks, SocialLinkButton } from "./shared";
 
 export function HeroSection() {
   return (
+  <>
     <section className="relative overflow-hidden pb-10 pt-4 lg:pb-16">
       <div className="section-shell relative">
         <SiteNav />
@@ -55,13 +56,22 @@ export function HeroSection() {
                   <div className="absolute -inset-3 rounded-[2rem] bg-[linear-gradient(135deg,rgba(255,255,255,0.18),transparent)] blur-2xl" />
                   <div className="relative aspect-[16/10] min-h-[20rem] overflow-hidden rounded-[2rem] border border-white/10 bg-[#11141b] shadow-[0_30px_70px_rgba(0,0,0,0.45)]">
                     <Image
-                      src="/assets/hero-background.jpg"
+                      src="/assets/portfolio_3-v2.jpg"
                       alt="Portrait of Aditya Dhar Dwivedi"
                       fill
                       sizes="(max-width: 1024px) 100vw, 520px"
                       className="object-contain object-center"
                       priority
                     />
+                    {/* <Image
+                      src="/assets/portfolio_3-v2.jpg"
+                      alt="Portrait of Aditya Dhar Dwivedi"
+                      width={800}
+                      height={960}
+                      sizes="(max-width: 1024px) 100vw, 560px"
+                      className="h-auto w-full object-cover object-[center_18%]"
+                      priority
+                    /> */}
                   </div>
                 </div>
 
@@ -79,6 +89,7 @@ export function HeroSection() {
         </div>
       </div>
     </section>
+  </>
   );
 }
 
@@ -90,6 +101,7 @@ function SiteNav() {
   ];
 
   return (
+    <>
     <nav className="absolute left-1/2 top-0 z-30 w-[min(100%,74rem)] -translate-x-1/2 px-6 pt-0 lg:px-10">
       <div className="overflow-hidden rounded-[1.35rem] border border-[rgba(18,18,18,0.1)] bg-white/72 shadow-[0_22px_60px_rgba(16,18,22,0.15)] backdrop-blur-lg">
         <div className="grid items-stretch lg:grid-cols-[0.78fr_1.22fr]">
@@ -150,5 +162,6 @@ function SiteNav() {
         </div>
       </div>
     </nav>
+    </>
   );
 }

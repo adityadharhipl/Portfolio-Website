@@ -1,13 +1,9 @@
+const CACHE_NAME = "aditya-portfolio-v2";
+const PRECACHE_URLS = ["/manifest.webmanifest", "/assets/portfolio_3-v2.jpg"];
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open("aditya-portfolio-v1").then((cache) =>
-      cache.addAll([
-        "/",
-        "/manifest.webmanifest",
-        "/assets/hero-background.jpg",
-        "/assets/portfolio_3.jpg",
-      ]),
-    ),
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_URLS)),
   );
   self.skipWaiting();
 });
@@ -21,6 +17,15 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
+  const requestUrl = new URL(event.request.url);
+  const isStaticAsset =
+    requestUrl.origin === self.location.origin &&
+    ["image", "style", "script", "font"].includes(event.request.destination);
+
+  if (!isStaticAsset) {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
@@ -30,7 +35,7 @@ self.addEventListener("fetch", (event) => {
       return fetch(event.request)
         .then((networkResponse) => {
           const responseClone = networkResponse.clone();
-          caches.open("aditya-portfolio-v1").then((cache) => {
+          caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, responseClone);
           });
           return networkResponse;
