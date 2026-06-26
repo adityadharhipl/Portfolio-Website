@@ -19,9 +19,9 @@ export function Footer() {
             ))}
           </div>
 
-          <p className="text-xs font-medium uppercase tracking-[0.34em] text-white/48">
-            © 2026 Aditya Dhar Dwivedi. Crafted as a static portfolio replica.
-          </p>
+          {/* <p className="text-xs font-medium uppercase tracking-[0.34em] text-white/48">
+            © 2026 Aditya Dhar Dwivedi.
+          </p> */}
         </div>
       </div>
     </footer>
