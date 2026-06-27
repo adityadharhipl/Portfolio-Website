@@ -67,7 +67,7 @@ export function MobileAppView({ onBackToWeb }: MobileAppViewProps) {
       {/* HEADER BAR */}
       <header className="h-14 shrink-0 bg-[#0b0c10]/80 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-5 z-40">
         <button 
-          onClick={() => handleTabChange(0)}
+          onClick={() => onBackToWeb ? onBackToWeb() : handleTabChange(0)}
           className="flex items-center gap-2 hover:opacity-80 transition"
         >
           {/* Avatar/Logo */}

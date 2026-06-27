@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { site, socialLinks, SocialLinkButton } from "./shared";
 
-export function HeroSection() {
+export function HeroSection({ onToggleView }: { onToggleView?: () => void }) {
   return (
     <>
       <section className="relative overflow-hidden pb-10 pt-4 lg:pb-16">
         <div className="section-shell relative">
-          <SiteNav />
+          <SiteNav onToggleView={onToggleView} />
 
           <div className="relative mt-10 overflow-hidden rounded-[2rem] border border-[rgba(18,18,18,0.08)] bg-[rgba(255,255,255,0.42)] shadow-[0_35px_100px_rgba(17,19,24,0.12)] backdrop-blur-sm lg:mt-12">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.6),transparent_38%),linear-gradient(135deg,rgba(255,255,255,0.32),rgba(255,255,255,0.08))]" />
@@ -85,7 +85,7 @@ export function HeroSection() {
   );
 }
 
-function SiteNav() {
+function SiteNav({ onToggleView }: { onToggleView?: () => void }) {
   const navLinks = [
     { label: "About me", href: "#about" },
     { label: "Skills", href: "#skills" },
@@ -98,13 +98,13 @@ function SiteNav() {
         <div className="overflow-hidden rounded-[1.35rem] border border-[rgba(18,18,18,0.1)] bg-white/72 shadow-[0_22px_60px_rgba(16,18,22,0.15)] backdrop-blur-lg">
           <div className="grid items-stretch lg:grid-cols-[0.78fr_1.22fr]">
             <div className="flex items-center justify-between border-b border-[rgba(18,18,18,0.08)] px-5 py-4 lg:border-b-0 lg:border-r">
-              <a
-                href="#top"
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[rgba(18,18,18,0.14)] bg-[var(--surface)] text-sm font-black tracking-[0.3em] text-[var(--foreground)]"
-                aria-label="Back to top"
+              <button
+                onClick={onToggleView}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[rgba(18,18,18,0.14)] bg-[var(--surface)] text-sm font-black tracking-[0.3em] text-[var(--foreground)] hover:bg-black/5 transition cursor-pointer"
+                aria-label="Toggle view mode"
               >
                 AD
-              </a>
+              </button>
 
               <details className="group relative lg:hidden">
                 <summary className="list-none rounded-full border border-[rgba(18,18,18,0.12)] bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.28em] text-[var(--foreground)]">

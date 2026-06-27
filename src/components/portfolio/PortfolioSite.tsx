@@ -43,7 +43,7 @@ export function PortfolioSite() {
         isMobile ? (
           /* Native Full Screen layout on mobile devices */
           <div className="h-screen w-screen overflow-hidden bg-[#0b0c10]">
-            <MobileAppView />
+            <MobileAppView onBackToWeb={() => setViewMode("web")} />
           </div>
         ) : (
           /* Phone Simulator frame layout on Desktop */
@@ -64,7 +64,7 @@ export function PortfolioSite() {
       ) : (
         /* Standard Web layout */
         <main id="top" className="text-[var(--foreground)] min-h-screen relative">
-          <HeroSection />
+          <HeroSection onToggleView={() => setViewMode(viewMode === "web" ? "app" : "web")} />
           <ItBerriesBanner />
           <AboutMeSection />
           <SkillsSection />
