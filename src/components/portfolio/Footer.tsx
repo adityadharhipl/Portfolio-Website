@@ -2,6 +2,7 @@ import { FooterLinkButton, footerLinks } from "./shared";
 
 export function Footer() {
   return (
+  <>
     <footer className="bg-[var(--night)] py-10 text-white lg:py-12">
       <div className="section-shell">
         <div className="flex flex-col gap-8 rounded-[2rem] border border-white/10 bg-white/4 px-6 py-8 sm:px-10 lg:flex-row lg:items-center lg:justify-between lg:px-14">
@@ -25,6 +26,7 @@ export function Footer() {
         </div>
       </div>
     </footer>
+  </>
   );
 }
 

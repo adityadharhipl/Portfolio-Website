@@ -23,6 +23,12 @@ export function PortfolioSite() {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
     };
+    
+    // Initial check to set default view mode on mobile
+    if (window.innerWidth < 768) {
+      setViewMode("app");
+    }
+    
     checkViewport();
     window.addEventListener("resize", checkViewport);
     setHasMounted(true);
