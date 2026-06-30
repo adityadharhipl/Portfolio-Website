@@ -194,7 +194,7 @@ export default function AdminPage() {
         <CssBaseline />
         <Container maxWidth="sm" sx={{ mt: 15 }}>
           <Paper elevation={24} sx={{ p: 5, border: '1px solid rgba(255,255,255,0.1)' }}>
-            <Box textAlign="center" mb={4}>
+            <Box sx={{ textAlign: "center", mb: 4 }}>
               <Typography variant="overline" sx={{ letterSpacing: '0.2em', color: 'text.secondary' }}>Access Restricted</Typography>
               <Typography variant="h4" fontWeight="bold">Admin Portal</Typography>
             </Box>
@@ -266,7 +266,7 @@ export default function AdminPage() {
               <DialogContent sx={{ px: 4, pb: 4 }}>
                 <TextField fullWidth margin="normal" label="Article Title" value={blogTitle} onChange={(e) => setBlogTitle(e.target.value)} variant="filled" />
                 
-                <Box mt={3} mb={2}>
+                <Box sx={{ mt: 3, mb: 2 }}>
                   <Button variant="outlined" component="label" startIcon={<CloudUploadIcon />} fullWidth sx={{ py: 2, borderStyle: 'dashed', borderWidth: 2 }}>
                     Upload Cover Image
                     <input type="file" hidden accept="image/*" onChange={handleImageUpload} />
@@ -274,7 +274,7 @@ export default function AdminPage() {
                 </Box>
                 
                 {blogImage && (
-                  <Box mb={3} display="flex" justifyContent="center" sx={{ bgcolor: 'rgba(0,0,0,0.5)', p: 2, borderRadius: 2 }}>
+                  <Box sx={{ mb: 3, display: "flex", justifyContent: "center", bgcolor: 'rgba(0,0,0,0.5)', p: 2, borderRadius: 2 }}>
                     <img src={blogImage} alt="Preview" style={{ maxWidth: '100%', maxHeight: '250px', objectFit: 'contain', borderRadius: '8px' }} />
                   </Box>
                 )}
