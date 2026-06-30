@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Container, Grid, Card, CardContent, CardMedia, Typography, Box, CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
+import Image from "next/image";
 
 export function BlogSection() {
   const [blogs, setBlogs] = useState<any[]>([]);
@@ -22,10 +22,11 @@ export function BlogSection() {
 
   if (loading) {
     return (
-      <section id="blog" className="py-20 lg:py-32 bg-[var(--surface)] text-[var(--foreground)]">
+      <section id="blog" className="py-10 lg:py-16">
         <div className="section-shell">
-          <Typography variant="h2" align="center" sx={{ mb: 6, fontWeight: 'bold' }}>Blog</Typography>
-          <Box sx={{ display: "flex", justifyContent: "center" }}><CircularProgress /></Box>
+          <div className="section-card overflow-hidden rounded-[2rem] bg-[var(--surface)] p-10 flex justify-center items-center">
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-[var(--night)] border-t-transparent"></div>
+          </div>
         </div>
       </section>
     );
@@ -34,79 +35,120 @@ export function BlogSection() {
   if (blogs.length === 0) return null;
 
   return (
-    <section id="blog" className="py-20 lg:py-32 bg-[var(--surface)] text-[var(--foreground)]">
+    <section id="blog" className="scroll-mt-24 py-10 lg:py-16">
       <div className="section-shell">
-        <Typography variant="h2" align="center" sx={{ mb: 6, fontWeight: 'black', textTransform: 'uppercase', letterSpacing: '-0.05em', fontSize: { xs: '3rem', md: '4rem' } }}>
-          Blog
-        </Typography>
+        <div className="section-card overflow-hidden rounded-[2rem] bg-[var(--surface)]">
+          <div className="relative min-h-[18rem] overflow-hidden bg-[linear-gradient(180deg,#11151c_0%,#171b22_50%,#232a32_100%)] px-6 py-10 text-white sm:px-10 lg:px-14 lg:py-14">
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,20,0.12),rgba(13,15,20,0.58))]" />
+            <div className="relative flex h-full flex-col justify-between gap-8 lg:flex-row lg:items-end">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.5em] text-white/58">
+                  Thoughts & Articles
+                </p>
+                <h2 className="mt-4 max-w-2xl text-4xl font-black uppercase tracking-[-0.05em] sm:text-5xl lg:text-6xl">
+                  Blog
+                </h2>
+              </div>
+              <div className="section-box section-box-dark">READ MORE</div>
+            </div>
+          </div>
 
-        <Grid container spacing={4}>
-          {blogs.map((blog) => (
-            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={blog._id}>
-              <Card
-                sx={{
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  cursor: 'pointer',
-                  transition: 'transform 0.2s',
-                  '&:hover': { transform: 'translateY(-4px)', boxShadow: 6 }
-                }}
-                onClick={() => setSelectedBlog(blog)}
-              >
-                {blog.imageUrl && (
-                  <CardMedia
-                    component="img"
-                    height="200"
-                    image={blog.imageUrl}
-                    alt={blog.title}
-                  />
-                )}
-                <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography gutterBottom variant="h5" component="h2" sx={{ fontWeight: 'bold' }}>
-                    {blog.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{
-                    display: '-webkit-box',
-                    WebkitLineClamp: 3,
-                    WebkitBoxOrient: 'vertical',
-                    overflow: 'hidden',
-                  }}>
-                    {blog.content}
-                  </Typography>
-                  <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 2 }}>
-                    {new Date(blog.createdAt).toLocaleDateString()}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-
-        <Dialog open={!!selectedBlog} onClose={() => setSelectedBlog(null)} maxWidth="md" fullWidth>
-          {selectedBlog && (
-            <>
-              <DialogTitle sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}>{selectedBlog.title}</DialogTitle>
-              <DialogContent dividers>
-                {selectedBlog.imageUrl && (
-                  <Box sx={{ mb: 3, display: "flex", justifyContent: "center" }}>
-                    <img src={selectedBlog.imageUrl} alt={selectedBlog.title} style={{ maxWidth: '100%', maxHeight: '400px', objectFit: 'contain', borderRadius: '8px' }} />
-                  </Box>
-                )}
-                <Typography variant="body1" sx={{ whiteSpace: 'pre-wrap', lineHeight: 1.8 }}>
-                  {selectedBlog.content}
-                </Typography>
-                <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 4 }}>
-                  Published on {new Date(selectedBlog.createdAt).toLocaleDateString()}
-                </Typography>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={() => setSelectedBlog(null)} color="primary">Close</Button>
-              </DialogActions>
-            </>
-          )}
-        </Dialog>
+          <div className="px-6 pb-10 pt-8 sm:px-10 lg:px-14 lg:pb-14">
+            <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {blogs.map((blog, index) => (
+                <article
+                  key={blog._id}
+                  onClick={() => setSelectedBlog(blog)}
+                  className={`group lift-card cursor-pointer overflow-hidden rounded-[1.5rem] border border-[rgba(18,18,18,0.08)] bg-white shadow-[0_18px_45px_rgba(16,18,22,0.08)] ${
+                    index % 2 === 1 ? "md:translate-y-4 xl:translate-y-0" : ""
+                  }`}
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden bg-[var(--night)] flex items-center justify-center">
+                    {blog.imageUrl ? (
+                      <img
+                        src={blog.imageUrl}
+                        alt={blog.title}
+                        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="text-white/20 uppercase font-black text-2xl tracking-widest">BLOG</div>
+                    )}
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,15,20,0.1),rgba(13,15,20,0.55))]" />
+                    <div className="absolute left-5 top-5 rounded-full border border-white/18 bg-black/18 px-3 py-1 text-[0.62rem] font-black uppercase tracking-[0.4em] text-white/78 backdrop-blur-sm">
+                      ARTICLE
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between px-5 py-4">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.36em] text-[rgba(18,18,18,0.46)]">
+                        {new Date(blog.createdAt).toLocaleDateString()}
+                      </p>
+                      <h3 className="mt-2 text-xl font-black tracking-[-0.04em] line-clamp-1">{blog.title}</h3>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
+
+      {/* Custom Modal for Blog */}
+      {selectedBlog && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 lg:p-8">
+          <div 
+            className="absolute inset-0 bg-[#07090e]/80 backdrop-blur-md transition-opacity" 
+            onClick={() => setSelectedBlog(null)} 
+          />
+          
+          <div className="relative w-full max-w-3xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#11141b] shadow-2xl text-white">
+            <button 
+              onClick={() => setSelectedBlog(null)}
+              className="absolute right-6 top-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-white transition hover:bg-white/10"
+            >
+              ✕
+            </button>
+            
+            {selectedBlog.imageUrl && (
+              <div className="relative h-64 w-full sm:h-80 lg:h-96 bg-black flex items-center justify-center overflow-hidden">
+                <img 
+                  src={selectedBlog.imageUrl} 
+                  alt={selectedBlog.title} 
+                  className="absolute inset-0 h-full w-full object-cover opacity-40 blur-sm"
+                />
+                <img 
+                  src={selectedBlog.imageUrl} 
+                  alt={selectedBlog.title} 
+                  className="relative z-10 max-h-full max-w-full object-contain drop-shadow-2xl"
+                />
+              </div>
+            )}
+            
+            <div className="px-8 pb-10 pt-8 sm:px-12 lg:px-16">
+              <div className="mb-4 inline-block rounded-full border border-white/18 bg-white/5 px-4 py-1.5 text-[0.68rem] font-black uppercase tracking-[0.4em] text-white/80">
+                Article
+              </div>
+              <h3 className="mb-8 text-3xl font-black tracking-tight sm:text-4xl">{selectedBlog.title}</h3>
+              
+              <div className="mb-10 text-sm leading-relaxed text-white/70 sm:text-base whitespace-pre-wrap">
+                {selectedBlog.content}
+              </div>
+              
+              <div className="flex justify-between items-center border-t border-white/10 pt-6">
+                <div className="text-xs font-semibold uppercase tracking-[0.3em] text-white/40">
+                  {new Date(selectedBlog.createdAt).toLocaleDateString()}
+                </div>
+                <button 
+                  onClick={() => setSelectedBlog(null)}
+                  className="rounded-full border border-white/20 bg-transparent px-6 py-2.5 text-xs font-black uppercase tracking-[0.25em] text-white transition hover:bg-white hover:text-black"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

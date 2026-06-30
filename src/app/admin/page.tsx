@@ -1,11 +1,49 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Container, Box, Typography, TextField, Button, Paper, CircularProgress, Tabs, Tab, IconButton, Dialog, DialogTitle, DialogContent, DialogActions, Grid } from "@mui/material";
+import { Container, Box, Typography, TextField, Button, Paper, CircularProgress, Tabs, Tab, IconButton, Dialog, DialogTitle, DialogContent, DialogActions, Grid, ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import LogoutIcon from "@mui/icons-material/Logout";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#90caf9',
+    },
+    background: {
+      default: '#07090e',
+      paper: '#11141b',
+    },
+  },
+  typography: {
+    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+  },
+  shape: {
+    borderRadius: 16,
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          fontWeight: 700,
+          borderRadius: 8,
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundImage: 'none',
+        },
+      },
+    },
+  },
+});
 
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
@@ -28,17 +66,10 @@ export default function AdminPage() {
   const [cvSuccess, setCvSuccess] = useState("");
 
   useEffect(() => {
-    // Check auth by trying to fetch blogs, if it fails, maybe not auth (or just assume simple auth for now)
-    // Actually, we can check if cookie exists via an API or just use a simple state since it's a client component.
-    // Let's create a simple /api/auth/check route or just assume not authenticated on load and try to fetch blogs.
     checkAuth();
   }, []);
 
   const checkAuth = () => {
-    // Check if we have the cookie set (cookies are httpOnly, so we can't read them directly)
-    // Let's just try to fetch CV, if we get it, we are fine. (CV is public anyway)
-    // Since there's no complex JWT, we'll rely on the login API response to set our state.
-    // For a real app, you'd use a session or a /api/auth/me route.
     const isAuth = localStorage.getItem("admin_auth") === "true";
     setIsAuthenticated(isAuth);
     if (isAuth) {
@@ -89,6 +120,17 @@ export default function AdminPage() {
     setIsAuthenticated(false);
   };
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setBlogImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSaveBlog = async () => {
     const url = editingBlog ? `/api/blogs/${editingBlog._id}` : "/api/blogs";
     const method = editingBlog ? "PUT" : "POST";
@@ -136,87 +178,129 @@ export default function AdminPage() {
   };
 
   if (isAuthenticated === null) {
-    return <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}><CircularProgress /></Box>;
+    return (
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
+          <CircularProgress />
+        </Box>
+      </ThemeProvider>
+    );
   }
 
   if (!isAuthenticated) {
     return (
-      <Container maxWidth="sm" sx={{ mt: 10 }}>
-        <Paper elevation={3} sx={{ p: 4 }}>
-          <Typography variant="h4" gutterBottom align="center">Admin Login</Typography>
-          <form onSubmit={handleLogin}>
-            <TextField fullWidth margin="normal" label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-            <TextField fullWidth margin="normal" label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-            {error && <Typography color="error" variant="body2" sx={{ mt: 1 }}>{error}</Typography>}
-            <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 3, py: 1.5 }}>Login</Button>
-          </form>
-        </Paper>
-      </Container>
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <Container maxWidth="sm" sx={{ mt: 15 }}>
+          <Paper elevation={24} sx={{ p: 5, border: '1px solid rgba(255,255,255,0.1)' }}>
+            <Box textAlign="center" mb={4}>
+              <Typography variant="overline" sx={{ letterSpacing: '0.2em', color: 'text.secondary' }}>Access Restricted</Typography>
+              <Typography variant="h4" fontWeight="bold">Admin Portal</Typography>
+            </Box>
+            
+            <form onSubmit={handleLogin}>
+              <TextField fullWidth margin="normal" label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required variant="outlined" />
+              <TextField fullWidth margin="normal" label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required variant="outlined" />
+              {error && <Typography color="error" variant="body2" sx={{ mt: 2, textAlign: 'center' }}>{error}</Typography>}
+              <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 4, py: 1.5, fontSize: '1rem' }}>Secure Login</Button>
+            </form>
+          </Paper>
+        </Container>
+      </ThemeProvider>
     );
   }
 
   return (
-    <Container maxWidth="lg" sx={{ py: 5 }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 4 }}>
-        <Typography variant="h3">Admin Dashboard</Typography>
-        <Button startIcon={<LogoutIcon />} onClick={handleLogout} variant="outlined" color="error">Logout</Button>
-      </Box>
-
-      <Paper sx={{ mb: 4 }}>
-        <Tabs value={tab} onChange={(_, v) => setTab(v)} variant="fullWidth">
-          <Tab label="Blogs" />
-          <Tab label="CV Management" />
-        </Tabs>
-      </Paper>
-
-      {tab === 0 && (
-        <Box>
-          <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
-            <Button variant="contained" startIcon={<AddIcon />} onClick={() => openBlogDialog()}>Add New Blog</Button>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Container maxWidth="lg" sx={{ py: 6 }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 6 }}>
+          <Box>
+            <Typography variant="overline" sx={{ letterSpacing: '0.2em', color: 'text.secondary' }}>Dashboard</Typography>
+            <Typography variant="h3" fontWeight="900">Portfolio Admin</Typography>
           </Box>
-          <Grid container spacing={3}>
-            {blogs.map((blog) => (
-              <Grid size={{ xs: 12, md: 6 }} key={blog._id}>
-                <Paper sx={{ p: 3, height: "100%", display: "flex", flexDirection: "column" }}>
-                  <Typography variant="h6" gutterBottom>{blog.title}</Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ flexGrow: 1, mb: 2, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
-                    {blog.content}
-                  </Typography>
-                  <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
-                    <IconButton color="primary" onClick={() => openBlogDialog(blog)}><EditIcon /></IconButton>
-                    <IconButton color="error" onClick={() => handleDeleteBlog(blog._id)}><DeleteIcon /></IconButton>
-                  </Box>
-                </Paper>
-              </Grid>
-            ))}
-          </Grid>
-
-          <Dialog open={blogDialog} onClose={() => setBlogDialog(false)} fullWidth maxWidth="md">
-            <DialogTitle>{editingBlog ? "Edit Blog" : "New Blog"}</DialogTitle>
-            <DialogContent>
-              <TextField fullWidth margin="normal" label="Title" value={blogTitle} onChange={(e) => setBlogTitle(e.target.value)} />
-              <TextField fullWidth margin="normal" label="Image URL (Optional)" value={blogImage} onChange={(e) => setBlogImage(e.target.value)} />
-              <TextField fullWidth margin="normal" label="Content" multiline rows={8} value={blogContent} onChange={(e) => setBlogContent(e.target.value)} />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => setBlogDialog(false)}>Cancel</Button>
-              <Button onClick={handleSaveBlog} variant="contained">Save</Button>
-            </DialogActions>
-          </Dialog>
+          <Button startIcon={<LogoutIcon />} onClick={handleLogout} variant="outlined" color="error" sx={{ borderRadius: 50, px: 3 }}>
+            Logout
+          </Button>
         </Box>
-      )}
 
-      {tab === 1 && (
-        <Paper sx={{ p: 4 }}>
-          <Typography variant="h6" gutterBottom>Update CV Link</Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-            Provide a direct link to your CV (e.g., Google Drive PDF link). This link will be used when visitors click &quot;Download CV&quot;.
-          </Typography>
-          <TextField fullWidth label="CV URL" value={cvUrl} onChange={(e) => setCvUrl(e.target.value)} margin="normal" />
-          {cvSuccess && <Typography color="success.main" variant="body2" sx={{ mt: 1 }}>{cvSuccess}</Typography>}
-          <Button variant="contained" sx={{ mt: 2 }} onClick={handleUpdateCv}>Update CV</Button>
+        <Paper sx={{ mb: 5, border: '1px solid rgba(255,255,255,0.05)' }}>
+          <Tabs value={tab} onChange={(_, v) => setTab(v)} variant="fullWidth" indicatorColor="primary" textColor="primary">
+            <Tab label="Manage Blogs" sx={{ fontWeight: 'bold', py: 2 }} />
+            <Tab label="CV Link" sx={{ fontWeight: 'bold', py: 2 }} />
+          </Tabs>
         </Paper>
-      )}
-    </Container>
+
+        {tab === 0 && (
+          <Box>
+            <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 4 }}>
+              <Button variant="contained" startIcon={<AddIcon />} onClick={() => openBlogDialog()} sx={{ px: 4, py: 1.5, borderRadius: 50 }}>
+                Draft New Article
+              </Button>
+            </Box>
+            <Grid container spacing={4}>
+              {blogs.map((blog) => (
+                <Grid size={{ xs: 12, md: 6 }} key={blog._id}>
+                  <Paper sx={{ p: 4, height: "100%", display: "flex", flexDirection: "column", border: '1px solid rgba(255,255,255,0.05)', transition: '0.2s', '&:hover': { borderColor: 'primary.main', transform: 'translateY(-4px)' } }}>
+                    <Typography variant="h5" fontWeight="bold" gutterBottom>{blog.title}</Typography>
+                    <Typography variant="caption" color="primary" display="block" mb={2}>
+                      {new Date(blog.createdAt).toLocaleDateString()}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ flexGrow: 1, mb: 3, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+                      {blog.content}
+                    </Typography>
+                    <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
+                      <IconButton color="primary" onClick={() => openBlogDialog(blog)} sx={{ bgcolor: 'rgba(144, 202, 249, 0.1)' }}><EditIcon /></IconButton>
+                      <IconButton color="error" onClick={() => handleDeleteBlog(blog._id)} sx={{ bgcolor: 'rgba(244, 67, 54, 0.1)' }}><DeleteIcon /></IconButton>
+                    </Box>
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
+
+            <Dialog open={blogDialog} onClose={() => setBlogDialog(false)} fullWidth maxWidth="md" PaperProps={{ sx: { border: '1px solid rgba(255,255,255,0.1)' } }}>
+              <DialogTitle sx={{ pb: 1, pt: 3, px: 4 }}>
+                <Typography variant="h5" fontWeight="bold">{editingBlog ? "Edit Article" : "Draft New Article"}</Typography>
+              </DialogTitle>
+              <DialogContent sx={{ px: 4, pb: 4 }}>
+                <TextField fullWidth margin="normal" label="Article Title" value={blogTitle} onChange={(e) => setBlogTitle(e.target.value)} variant="filled" />
+                
+                <Box mt={3} mb={2}>
+                  <Button variant="outlined" component="label" startIcon={<CloudUploadIcon />} fullWidth sx={{ py: 2, borderStyle: 'dashed', borderWidth: 2 }}>
+                    Upload Cover Image
+                    <input type="file" hidden accept="image/*" onChange={handleImageUpload} />
+                  </Button>
+                </Box>
+                
+                {blogImage && (
+                  <Box mb={3} display="flex" justifyContent="center" sx={{ bgcolor: 'rgba(0,0,0,0.5)', p: 2, borderRadius: 2 }}>
+                    <img src={blogImage} alt="Preview" style={{ maxWidth: '100%', maxHeight: '250px', objectFit: 'contain', borderRadius: '8px' }} />
+                  </Box>
+                )}
+                
+                <TextField fullWidth margin="normal" label="Content" multiline rows={12} value={blogContent} onChange={(e) => setBlogContent(e.target.value)} variant="filled" />
+              </DialogContent>
+              <DialogActions sx={{ px: 4, pb: 3 }}>
+                <Button onClick={() => setBlogDialog(false)} color="inherit" sx={{ mr: 1 }}>Cancel</Button>
+                <Button onClick={handleSaveBlog} variant="contained" color="primary" sx={{ px: 4 }}>Publish</Button>
+              </DialogActions>
+            </Dialog>
+          </Box>
+        )}
+
+        {tab === 1 && (
+          <Paper sx={{ p: 6, border: '1px solid rgba(255,255,255,0.05)' }}>
+            <Typography variant="h5" fontWeight="bold" gutterBottom>CV Link Configuration</Typography>
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 4, maxWidth: '600px' }}>
+              Provide a direct link to your CV (e.g., Google Drive PDF link). This link will be used when visitors click &quot;Download CV&quot; on the main portfolio page.
+            </Typography>
+            <TextField fullWidth label="CV URL" value={cvUrl} onChange={(e) => setCvUrl(e.target.value)} margin="normal" variant="filled" />
+            {cvSuccess && <Typography color="success.main" variant="body2" sx={{ mt: 2, fontWeight: 'bold' }}>{cvSuccess}</Typography>}
+            <Button variant="contained" size="large" sx={{ mt: 4, px: 5, borderRadius: 50 }} onClick={handleUpdateCv}>Save CV Link</Button>
+          </Paper>
+        )}
+      </Container>
+    </ThemeProvider>
   );
 }
