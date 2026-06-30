@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { site, socialLinks, SocialLinkButton } from "./shared";
+import { CvDownloadButton } from "./CvDownloadButton";
 
 export function HeroSection() {
   return (
@@ -87,6 +88,8 @@ function SiteNav() {
     { label: "About me", href: "#about" },
     { label: "Skills", href: "#skills" },
     { label: "Portfolio", href: "#portfolio" },
+    { label: "Blog", href: "#blog" },
+    { label: "Admin", href: "/admin" },
   ];
 
   return (
@@ -123,6 +126,7 @@ function SiteNav() {
                   >
                     Contact me
                   </a>
+                  <CvDownloadButton className="mt-1 rounded-full bg-white border border-[rgba(18,18,18,0.12)] px-4 py-3 text-center text-xs font-black uppercase tracking-[0.28em] text-[var(--night)]" />
                 </div>
               </div>
             </details>
@@ -140,12 +144,15 @@ function SiteNav() {
                 </a>
               ))}
             </div>
-            <a
-              href="#contact"
-              className="rounded-full border border-white/26 px-5 py-2.5 text-xs font-black uppercase tracking-[0.28em] text-white transition hover:bg-white hover:text-[var(--night)]"
-            >
-              Contact me
-            </a>
+            <div className="flex items-center gap-4">
+              <a
+                href="#contact"
+                className="rounded-full border border-white/26 px-5 py-2.5 text-xs font-black uppercase tracking-[0.28em] text-white transition hover:bg-white hover:text-[var(--night)]"
+              >
+                Contact me
+              </a>
+              <CvDownloadButton className="rounded-full bg-white px-5 py-2.5 text-xs font-black uppercase tracking-[0.28em] text-[var(--night)] transition hover:bg-white/80" />
+            </div>
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { HeroSection } from "./HeroSection";
 import { ItBerriesBanner } from "./ItBerriesBanner";
 import { PortfolioSection } from "./PortfolioSection";
 import { SkillsSection } from "./SkillsSection";
+import { BlogSection } from "./BlogSection";
 
 export function PortfolioSite() {
   return (
@@ -14,6 +15,7 @@ export function PortfolioSite() {
       <AboutMeSection />
       <SkillsSection />
       <PortfolioSection />
+      <BlogSection />
       <ContactSection />
       <Footer />
     </main>
