@@ -2,9 +2,9 @@ import type { ComponentType } from "react";
 
 export const site = {
   name: "Aditya Dhar Dwivedi",
-  title: "MERN Stack Developer / Express.js Developer",
+  title: "Frontend & MERN Stack Developer",
   intro:
-    "Building Scalable, Modern, Efficient Web Applications. Turning Ideas into Robust Web Solutions.",
+    "Frontend-first developer with 3+ years of experience building responsive, high-performance web applications using React.js, Next.js, Node.js, and MongoDB.",
   location: "3+ years of hands-on MERN stack experience",
 };
 
@@ -112,11 +112,11 @@ export const skillGroups: Array<{ title: string; items: SkillItem[] }> = [
 
 export const portfolioProjects = [
   { title: "Crew Radar", category: "NODE.JS", sub: "REAL-TIME", image: "/assets/portfolio_1.svg", link: "https://www.crewradar.co.uk/", desc: "Real-time flight tracking platform using Node.js and WebSockets. Redis caching for load reduction; RabbitMQ for async event-based processing." },
-  { title: "MTGA Codes", category: "LARAVEL", sub: "E-COMMERCE", image: "/assets/portfolio_2.svg", link: "#", desc: "Digital goods store with Stripe, PayPal, and Coinbase payment integrations. Deployed on VPS with Laravel Telescope and query optimization." },
+  { title: "MTGA Codes", category: "NODE.JS", sub: "E-COMMERCE", image: "/assets/portfolio_2.svg", link: "#", desc: "Digital goods store with Stripe, PayPal, and Coinbase payment integrations. Deployed on VPS with query optimization and caching strategies." },
   { title: "Pioneers Learning Hub", category: "NODE.JS", sub: "LMS", image: "/assets/portfolio_3.svg", link: "#", desc: "Role-based LMS with RBAC, e-library, assessment system, invoicing, admin dashboards, and calendar-based session scheduling." },
-  { title: "Festival City", category: "LARAVEL", sub: "DIRECTORY", image: "/assets/portfolio_4.svg", link: "#", desc: "Bilingual Arabic and English business directory backend using Laravel, Next.js, and MySQL. Vendor onboarding and role-based admin workflows." },
+  { title: "Festival City", category: "NEXT.JS", sub: "DIRECTORY", image: "/assets/portfolio_4.svg", link: "#", desc: "Bilingual Arabic and English business directory. Next.js frontend, Node.js backend, MySQL. Vendor onboarding and role-based admin workflows." },
   { title: "Solfana", category: "NODE.JS", sub: "MEDIA", image: "/assets/portfolio_5.svg", link: "#", desc: "Podcast and audiobook platform backend with Node.js and PostgreSQL. TUS protocol for uploads, HLS streaming via Bunny CDN, BullMQ workers." },
-  { title: "Navo Ergonomics", category: "NEXT.JS", sub: "E-COMMERCE", image: "/assets/portfolio_6.svg", link: "#", desc: "E-commerce platform for ergonomic furniture and accessories built with Next.js, Node.js, headless WordPress, REST APIs, and ngenius payments." },
+  { title: "Navo Ergonomics", category: "NEXT.JS", sub: "E-COMMERCE", image: "/assets/portfolio_6.svg", link: "#", desc: "E-commerce platform for ergonomic furniture built with Next.js, Node.js, headless WordPress, REST APIs, and ngenius payments." },
 ];
 
 export const footerLinks: SocialLink[] = [
