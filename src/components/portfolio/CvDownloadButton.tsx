@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export function CvDownloadButton({ className }: { className?: string }) {
+export function CvDownloadButton({ className, style }: { className?: string; style?: React.CSSProperties }) {
   const [cvUrl, setCvUrl] = useState<string>("");
 
   useEffect(() => {
@@ -24,6 +24,7 @@ export function CvDownloadButton({ className }: { className?: string }) {
       rel="noopener noreferrer"
       onClick={!cvUrl ? (e) => e.preventDefault() : undefined}
       className={className}
+      style={style}
     >
       Download CV
     </a>

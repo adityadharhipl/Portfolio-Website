@@ -139,7 +139,10 @@ function SiteNav() {
                   >
                     Contact me
                   </a>
-                  <CvDownloadButton className="mt-1 rounded-full border px-4 py-3 text-center text-xs font-black uppercase tracking-[0.28em]" />
+                  <CvDownloadButton
+                    className="mt-1 rounded-full px-4 py-3 text-center text-xs font-black uppercase tracking-[0.28em] text-white"
+                    style={{ background: "#15171d" }}
+                  />
                 </div>
               </div>
             </details>
@@ -170,7 +173,10 @@ function SiteNav() {
               >
                 Contact me
               </a>
-              <CvDownloadButton className="whitespace-nowrap rounded-full bg-white px-4 py-2 text-[0.65rem] font-black uppercase tracking-[0.2em] text-black transition hover:bg-white/80" />
+              <CvDownloadButton
+                className="whitespace-nowrap rounded-full border px-4 py-2 text-[0.65rem] font-black uppercase tracking-[0.2em] text-white transition hover:bg-white hover:text-black"
+                style={{ border: "1px solid rgba(255,255,255,0.26)" }}
+              />
             </div>
           </div>
 
