@@ -147,30 +147,30 @@ function SiteNav() {
 
           {/* Right side — dark nav */}
           <div
-            className="hidden items-center justify-end gap-8 px-6 py-4 text-white lg:flex"
+            className="hidden items-center justify-between gap-4 px-5 py-3 text-white lg:flex"
             style={{ background: "linear-gradient(135deg,#1b1d25 0%,#0d0f14 100%)" }}
           >
-            <div className="flex items-center gap-8">
+            <div className="flex items-center gap-6">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-sm font-semibold transition hover:text-white"
+                  className="whitespace-nowrap text-sm font-semibold transition hover:text-white"
                   style={{ color: "rgba(255,255,255,0.8)" }}
                 >
                   {link.label}
                 </a>
               ))}
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 shrink-0">
               <a
                 href="#contact"
-                className="rounded-full border px-5 py-2.5 text-xs font-black uppercase tracking-[0.28em] text-white transition hover:bg-white hover:text-black"
+                className="whitespace-nowrap rounded-full border px-4 py-2 text-[0.65rem] font-black uppercase tracking-[0.2em] text-white transition hover:bg-white hover:text-black"
                 style={{ border: "1px solid rgba(255,255,255,0.26)" }}
               >
                 Contact me
               </a>
-              <CvDownloadButton className="rounded-full bg-white px-5 py-2.5 text-xs font-black uppercase tracking-[0.28em] text-black transition hover:bg-white/80" />
+              <CvDownloadButton className="whitespace-nowrap rounded-full bg-white px-4 py-2 text-[0.65rem] font-black uppercase tracking-[0.2em] text-black transition hover:bg-white/80" />
             </div>
           </div>
 

@@ -13,11 +13,10 @@ export function CvDownloadButton({ className }: { className?: string }) {
           setCvUrl(data.data.url);
         }
       })
-      .catch((err) => console.error(err));
+      .catch(() => {});
   }, []);
 
-  // Always render the button — just disable/hide href if URL not loaded yet
-  // This prevents layout shift (blinking) on first load
+  // Always render — no layout shift
   return (
     <a
       href={cvUrl || "#"}
@@ -25,7 +24,6 @@ export function CvDownloadButton({ className }: { className?: string }) {
       rel="noopener noreferrer"
       onClick={!cvUrl ? (e) => e.preventDefault() : undefined}
       className={className}
-      style={{ opacity: cvUrl ? 1 : 0.5, pointerEvents: cvUrl ? "auto" : "none" }}
     >
       Download CV
     </a>
