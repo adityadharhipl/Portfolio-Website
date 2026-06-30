@@ -4,7 +4,7 @@ export const site = {
   name: "Aditya Dhar Dwivedi",
   title: "MERN Stack Developer / Express.js Developer",
   intro:
-    "I build clean, responsive web apps with a focus on React, Node.js, Express, MongoDB, and practical shipping discipline. I like work that is fast, readable, and easy to grow.",
+    "Building Scalable, Modern, Efficient Web Applications. Turning Ideas into Robust Web Solutions.",
   location: "3+ years of hands-on MERN stack experience",
 };
 
@@ -38,7 +38,7 @@ export const socialLinks: SocialLink[] = [
   { label: "GitHub", href: "https://github.com/adityadharhipl", icon: GitHubIcon },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/aditya-dhar-dwivedi-2933781b0?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    href: "https://www.linkedin.com/in/aditya-dhar-dwivedi-2933781b0",
     icon: LinkedInIcon,
   },
 ];
@@ -46,71 +46,77 @@ export const socialLinks: SocialLink[] = [
 export const services: ServiceCard[] = [
   {
     title: "DESIGN",
-    description:
-      "Visual systems, layout decisions, and interface polish that make the page feel deliberate and distinct.",
+    description: "Visual systems, layout decisions, and interface polish.",
     icon: DesignIcon,
   },
   {
     title: "DEVELOPMENT",
-    description:
-      "Semantic, responsive front-end builds with thoughtful structure and reliable cross-device behavior.",
+    description: "Semantic, responsive front-end builds with thoughtful structure.",
     icon: DevelopmentIcon,
   },
   {
     title: "MAINTENANCE",
-    description:
-      "Careful updates, refinements, and performance-minded adjustments that keep the experience sharp.",
+    description: "Careful updates, refinements, and performance adjustments.",
     icon: MaintenanceIcon,
   },
   {
     title: "TEACHING",
-    description:
-      "Mentoring junior developers, explaining concepts clearly, and sharing practical MERN stack workflows.",
+    description: "Mentoring junior developers and sharing workflows.",
     icon: TeachingIcon,
   },
 ];
 
 export const skillGroups: Array<{ title: string; items: SkillItem[] }> = [
   {
-    title: "Using Now",
+    title: "Databases",
     items: [
-      { label: "HTML5", kind: "glyph", glyph: "HTML", bg: "#fff3eb", fg: "#d7461a" },
-      { label: "CSS3", kind: "glyph", glyph: "CSS", bg: "#ebf4ff", fg: "#2563eb" },
-      { label: "SASS", kind: "glyph", glyph: "SASS", bg: "#f8ecff", fg: "#cf649a" },
-      { label: "JS", kind: "glyph", glyph: "JS", bg: "#fff8db", fg: "#c9a20b" },
-      { label: "React", kind: "glyph", glyph: "Rx", bg: "#e5fbff", fg: "#1aa2c1" },
-      { label: "Bootstrap", kind: "glyph", glyph: "B", bg: "#f6efff", fg: "#7c3aed" },
-      { label: "Git", kind: "glyph", glyph: "Git", bg: "#fff0ee", fg: "#e15432" },
-      { label: "Figma", kind: "glyph", glyph: "F", bg: "#fdf0e9", fg: "#a855f7" },
+      { label: "MySQL", kind: "glyph", glyph: "SQL", bg: "#15202B", fg: "#3b82f6" },
+      { label: "PostgreSQL", kind: "glyph", glyph: "PG", bg: "#15202B", fg: "#3b82f6" },
+      { label: "MongoDB", kind: "glyph", glyph: "MG", bg: "#15202B", fg: "#10b981" },
+      { label: "AWS RDS", kind: "glyph", glyph: "RDS", bg: "#15202B", fg: "#f59e0b" },
     ],
   },
   {
-    title: "Learning",
+    title: "Backend",
     items: [
-      { label: "Node.js", kind: "glyph", glyph: "Node", bg: "#ecfdf3", fg: "#15803d" },
-      { label: "MySQL", kind: "glyph", glyph: "SQL", bg: "#eef6ff", fg: "#0369a1" },
-      { label: "MongoDB", kind: "glyph", glyph: "M", bg: "#eefbf1", fg: "#16a34a" },
-      { label: "TypeScript", kind: "glyph", glyph: "TS", bg: "#edf6ff", fg: "#2563eb" },
+      { label: "Node.js", kind: "glyph", glyph: "ND", bg: "#15202B", fg: "#10b981" },
+      { label: "Express.js", kind: "glyph", glyph: "EX", bg: "#15202B", fg: "#e5e7eb" },
+      { label: "NestJS", kind: "glyph", glyph: "NS", bg: "#15202B", fg: "#ef4444" },
     ],
   },
   {
-    title: "Other Skills",
+    title: "Frontend",
     items: [
-      { label: "English (UK)", kind: "uk" },
-      { label: "Spanish (Spain)", kind: "spain" },
-      { label: "C++", kind: "glyph", glyph: "C++", bg: "#eff6ff", fg: "#1d4ed8" },
-      { label: "C", kind: "glyph", glyph: "C", bg: "#f3f4f6", fg: "#334155" },
+      { label: "React", kind: "glyph", glyph: "RE", bg: "#15202B", fg: "#38bdf8" },
+      { label: "Next.js", kind: "glyph", glyph: "NX", bg: "#15202B", fg: "#e5e7eb" },
+    ],
+  },
+  {
+    title: "Tools & Cloud",
+    items: [
+      { label: "AWS", kind: "glyph", glyph: "AW", bg: "#15202B", fg: "#f59e0b" },
+      { label: "DigitalOcean", kind: "glyph", glyph: "DO", bg: "#15202B", fg: "#3b82f6" },
+      { label: "Docker", kind: "glyph", glyph: "DK", bg: "#15202B", fg: "#0ea5e9" },
+      { label: "VPS", kind: "glyph", glyph: "VP", bg: "#15202B", fg: "#9ca3af" },
+      { label: "GitHub", kind: "glyph", glyph: "GH", bg: "#15202B", fg: "#f3f4f6" },
+      { label: "CI/CD", kind: "glyph", glyph: "CI", bg: "#15202B", fg: "#10b981" },
+      { label: "Cloudflare", kind: "glyph", glyph: "CF", bg: "#15202B", fg: "#f97316" },
+      { label: "Redis", kind: "glyph", glyph: "RD", bg: "#15202B", fg: "#ef4444" },
+      { label: "RabbitMQ", kind: "glyph", glyph: "RM", bg: "#15202B", fg: "#f97316" },
+      { label: "Kafka", kind: "glyph", glyph: "KF", bg: "#15202B", fg: "#e5e7eb" },
+      { label: "Sentry", kind: "glyph", glyph: "SE", bg: "#15202B", fg: "#8b5cf6" },
+      { label: "SonarQube", kind: "glyph", glyph: "SQ", bg: "#15202B", fg: "#3b82f6" },
     ],
   },
 ];
 
 export const portfolioProjects = [
-  { title: "Neon Grid", category: "CODED", image: "/assets/portfolio_1.svg" },
-  { title: "eatome.", category: "DESIGNED", image: "/assets/portfolio_2.svg" },
-  { title: "Night Drive", category: "CODED", image: "/assets/portfolio_3.jpg" },
-  { title: "Orbit", category: "DESIGNED", image: "/assets/portfolio_4.svg" },
-  { title: "Signal", category: "CODED", image: "/assets/portfolio_5.svg" },
-  { title: "Neural UI", category: "DESIGNED", image: "/assets/portfolio_6.svg" },
+  { title: "Crew Radar", category: "NODE.JS", sub: "REAL-TIME", image: "/assets/portfolio_1.svg", link: "https://www.crewradar.co.uk/", desc: "Real-time flight tracking platform using Node.js and WebSockets. Redis caching for load reduction; RabbitMQ for async event-based processing." },
+  { title: "MTGA Codes", category: "LARAVEL", sub: "E-COMMERCE", image: "/assets/portfolio_2.svg", link: "#", desc: "Digital goods store with Stripe, PayPal, and Coinbase payment integrations. Deployed on VPS with Laravel Telescope and query optimization." },
+  { title: "Pioneers Learning Hub", category: "NODE.JS", sub: "LMS", image: "/assets/portfolio_3.svg", link: "#", desc: "Role-based LMS with RBAC, e-library, assessment system, invoicing, admin dashboards, and calendar-based session scheduling." },
+  { title: "Festival City", category: "LARAVEL", sub: "DIRECTORY", image: "/assets/portfolio_4.svg", link: "#", desc: "Bilingual Arabic and English business directory backend using Laravel, Next.js, and MySQL. Vendor onboarding and role-based admin workflows." },
+  { title: "Solfana", category: "NODE.JS", sub: "MEDIA", image: "/assets/portfolio_5.svg", link: "#", desc: "Podcast and audiobook platform backend with Node.js and PostgreSQL. TUS protocol for uploads, HLS streaming via Bunny CDN, BullMQ workers." },
+  { title: "Navo Ergonomics", category: "NEXT.JS", sub: "E-COMMERCE", image: "/assets/portfolio_6.svg", link: "#", desc: "E-commerce platform for ergonomic furniture and accessories built with Next.js, Node.js, headless WordPress, REST APIs, and ngenius payments." },
 ];
 
 export const footerLinks: SocialLink[] = [
@@ -118,13 +124,13 @@ export const footerLinks: SocialLink[] = [
   { label: "GitHub", href: "https://github.com/adityadharhipl", icon: GitHubIcon },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/aditya-dhar-dwivedi-2933781b0?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    href: "https://www.linkedin.com/in/aditya-dhar-dwivedi-2933781b0",
     icon: LinkedInIcon,
   },
 ];
 
 export function SectionHeader({ title }: { title: string }) {
-  return <div className="section-box">{title}</div>;
+  return <div className="section-box text-white bg-transparent border-white/20">{title}</div>;
 }
 
 export function SocialLinkButton({ label, href, icon: Icon }: SocialLink) {
@@ -133,7 +139,7 @@ export function SocialLinkButton({ label, href, icon: Icon }: SocialLink) {
       href={href}
       target={href.startsWith("http") ? "_blank" : undefined}
       rel={href.startsWith("http") ? "noreferrer" : undefined}
-      className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[rgba(18,18,18,0.12)] bg-white/72 text-[var(--foreground)] transition hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_35px_rgba(16,18,22,0.1)]"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-[#15202B] text-white transition hover:-translate-y-0.5 hover:bg-white/10"
       aria-label={label}
       title={label}
     >
@@ -148,7 +154,7 @@ export function FooterLinkButton({ label, href, icon: Icon }: SocialLink) {
       href={href}
       target={href.startsWith("http") ? "_blank" : undefined}
       rel={href.startsWith("http") ? "noreferrer" : undefined}
-      className="inline-flex h-11 items-center gap-3 rounded-full border border-white/12 bg-white/6 px-4 text-sm font-semibold text-white/84 transition hover:bg-white hover:text-[var(--night)]"
+      className="inline-flex h-11 items-center gap-3 rounded-full border border-white/12 bg-white/6 px-4 text-sm font-semibold text-white/84 transition hover:bg-white hover:text-black"
       aria-label={label}
     >
       <Icon />
@@ -161,8 +167,7 @@ export function SkillTag({ item }: { item: SkillItem }) {
   if (item.kind === "glyph") {
     return (
       <div
-        className="inline-flex items-center gap-3 rounded-full border border-[rgba(18,18,18,0.08)] px-4 py-2.5 text-sm font-semibold shadow-[0_10px_25px_rgba(16,18,22,0.06)]"
-        style={{ backgroundColor: item.bg, color: item.fg }}
+        className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-[#15202B] px-4 py-2.5 text-sm font-semibold text-white shadow-xl"
       >
         <SkillGlyph glyph={item.glyph} background={item.bg} foreground={item.fg} />
         {item.label}
@@ -170,12 +175,7 @@ export function SkillTag({ item }: { item: SkillItem }) {
     );
   }
 
-  return (
-    <div className="inline-flex items-center gap-3 rounded-full border border-[rgba(18,18,18,0.08)] bg-white px-4 py-2.5 text-sm font-semibold shadow-[0_10px_25px_rgba(16,18,22,0.06)]">
-      {item.kind === "uk" ? <UkFlagIcon /> : <SpainFlagIcon />}
-      {item.kind === "uk" ? "English (UK)" : "Spanish (Spain)"}
-    </div>
-  );
+  return null;
 }
 
 export function UnderlineField({
@@ -191,20 +191,20 @@ export function UnderlineField({
 }) {
   return (
     <label className="grid gap-2">
-      <span className="text-xs font-black uppercase tracking-[0.36em] text-[rgba(18,18,18,0.54)]">
+      <span className="text-xs font-black uppercase tracking-[0.36em] text-white/50">
         {label}
       </span>
       {multiline ? (
         <textarea
           placeholder={placeholder}
           rows={4}
-          className="border-b border-[rgba(18,18,18,0.16)] bg-transparent px-0 py-3 text-base text-[var(--foreground)] outline-none transition placeholder:text-[rgba(18,18,18,0.34)] focus:border-[var(--foreground)]"
+          className="border-b border-white/20 bg-transparent px-0 py-3 text-base text-white outline-none transition focus:border-white"
         />
       ) : (
         <input
           type={type}
           placeholder={placeholder}
-          className="border-b border-[rgba(18,18,18,0.16)] bg-transparent px-0 py-3 text-base text-[var(--foreground)] outline-none transition placeholder:text-[rgba(18,18,18,0.34)] focus:border-[var(--foreground)]"
+          className="border-b border-white/20 bg-transparent px-0 py-3 text-base text-white outline-none transition focus:border-white"
         />
       )}
     </label>
@@ -213,7 +213,7 @@ export function UnderlineField({
 
 export function WaveDivider() {
   return (
-    <svg viewBox="0 0 240 26" className="h-6 w-full text-[rgba(18,18,18,0.44)]" fill="none" aria-hidden="true">
+    <svg viewBox="0 0 240 26" className="h-6 w-full text-white/20" fill="none" aria-hidden="true">
       <path
         d="M2 13c10 0 10-10 20-10s10 20 20 20 10-20 20-20 10 20 20 20 10-20 20-20 10 20 20 20 10-20 20-20 10 20 20 20 10-10 20-10"
         stroke="currentColor"
@@ -336,28 +336,6 @@ function TeachingIcon() {
       />
       <path d="M8 12h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
       <path d="M12 8v8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function UkFlagIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
-      <rect x="3" y="5" width="18" height="14" rx="3" fill="#1d4ed8" />
-      <path d="M3 6.5 21 17.5M21 6.5 3 17.5" stroke="#fff" strokeWidth="3.4" />
-      <path d="M12 5v14M3 12h18" stroke="#fff" strokeWidth="3.4" />
-      <path d="M12 5v14M3 12h18" stroke="#d91f26" strokeWidth="1.5" />
-      <path d="M3 6.5 21 17.5M21 6.5 3 17.5" stroke="#d91f26" strokeWidth="1.2" />
-    </svg>
-  );
-}
-
-function SpainFlagIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
-      <rect x="3" y="6" width="18" height="12" rx="3" fill="#c62828" />
-      <rect x="3" y="9" width="18" height="6" fill="#f6c239" />
-      <path d="M8.5 10.4h2v3.2h-2z" fill="#c62828" />
     </svg>
   );
 }
