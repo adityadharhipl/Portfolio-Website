@@ -49,11 +49,11 @@ export function HeroSection() {
                   <div className="relative aspect-[16/10] min-h-[20rem] overflow-hidden rounded-[2rem] border border-white/10 bg-[#07090e] shadow-2xl flex items-center justify-center">
                     {/* Replaced with a more generic placeholder/banner style as requested */}
                     <Image
-                      src="/assets/hero-background.jpg"
-                      alt="Banner Image"
+                      src="/assets/hero-portrait.jpg"
+                      alt="Aditya Dhar Dwivedi"
                       fill
                       sizes="(max-width: 1024px) 100vw, 520px"
-                      className="object-cover object-top opacity-80"
+                      className="object-cover object-top"
                       priority
                     />
                   </div>

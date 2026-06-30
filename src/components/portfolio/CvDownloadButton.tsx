@@ -9,21 +9,23 @@ export function CvDownloadButton({ className }: { className?: string }) {
     fetch("/api/cv")
       .then((res) => res.json())
       .then((data) => {
-        if (data.success && data.data.url) {
+        if (data.success && data.data?.url) {
           setCvUrl(data.data.url);
         }
       })
       .catch((err) => console.error(err));
   }, []);
 
-  if (!cvUrl) return null;
-
+  // Always render the button — just disable/hide href if URL not loaded yet
+  // This prevents layout shift (blinking) on first load
   return (
     <a
-      href={cvUrl}
-      target="_blank"
+      href={cvUrl || "#"}
+      target={cvUrl ? "_blank" : undefined}
       rel="noopener noreferrer"
+      onClick={!cvUrl ? (e) => e.preventDefault() : undefined}
       className={className}
+      style={{ opacity: cvUrl ? 1 : 0.5, pointerEvents: cvUrl ? "auto" : "none" }}
     >
       Download CV
     </a>

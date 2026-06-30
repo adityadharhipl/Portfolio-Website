@@ -19,6 +19,7 @@
 
 html {
   background: var(--background);
+  scroll-behavior: smooth;
 }
 
 body {
@@ -135,8 +136,8 @@ img {
 
 @keyframes reveal-up {
   from {
-    opacity: 0;
-    transform: translateY(22px);
+    opacity: 0.6;
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
