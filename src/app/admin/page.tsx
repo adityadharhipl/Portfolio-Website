@@ -60,6 +60,8 @@ export default function AdminPage() {
   const [blogTitle, setBlogTitle] = useState("");
   const [blogContent, setBlogContent] = useState("");
   const [blogImage, setBlogImage] = useState("");
+  const [shareDialog, setShareDialog] = useState(false);
+  const [shareUrl, setShareUrl] = useState("");
 
   // CV State
   const [cvUrl, setCvUrl] = useState("");
@@ -145,6 +147,14 @@ export default function AdminPage() {
     if (data.success) {
       setBlogDialog(false);
       fetchData();
+      
+      // If it's a new post, open the share dialog
+      if (!editingBlog && data.data?._id) {
+        // Build the full URL based on current window location
+        const baseUrl = window.location.origin;
+        setShareUrl(`${baseUrl}/blogs/${data.data._id}`);
+        setShareDialog(true);
+      }
     }
   };
 
@@ -284,6 +294,36 @@ export default function AdminPage() {
               <DialogActions sx={{ px: 4, pb: 3 }}>
                 <Button onClick={() => setBlogDialog(false)} color="inherit" sx={{ mr: 1 }}>Cancel</Button>
                 <Button onClick={handleSaveBlog} variant="contained" color="primary" sx={{ px: 4 }}>Publish</Button>
+              </DialogActions>
+            </Dialog>
+            <Dialog open={shareDialog} onClose={() => setShareDialog(false)} maxWidth="sm" fullWidth sx={{ '& .MuiDialog-paper': { border: '1px solid rgba(255,255,255,0.1)', textAlign: 'center', p: 3 } }}>
+              <DialogTitle>
+                <Typography variant="h5" sx={{ fontWeight: "bold", color: "success.main" }}>Success!</Typography>
+              </DialogTitle>
+              <DialogContent>
+                <Typography variant="body1" sx={{ mb: 3 }}>
+                  Your article has been successfully published.
+                </Typography>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    bgcolor: "#0077b5",
+                    "&:hover": { bgcolor: "#005582" },
+                    py: 1.5,
+                    fontSize: "1rem",
+                    fontWeight: "bold",
+                  }}
+                  onClick={() => setShareDialog(false)}
+                >
+                  Share to LinkedIn
+                </Button>
+              </DialogContent>
+              <DialogActions sx={{ justifyContent: 'center' }}>
+                <Button onClick={() => setShareDialog(false)} color="inherit">Maybe Later</Button>
               </DialogActions>
             </Dialog>
           </Box>
