@@ -18,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full scroll-smooth antialiased">
-      <body className="min-h-full bg-[var(--background)] text-[var(--foreground)]">
+    <html lang="en" className="h-full scroll-smooth antialiased" style={{ background: '#0b0c10' }}>
+      <body className="min-h-full" style={{ background: '#0b0c10', color: '#ffffff' }}>
         <PwaRegistration />
         {children}
       </body>
