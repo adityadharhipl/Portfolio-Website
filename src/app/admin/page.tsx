@@ -196,7 +196,7 @@ export default function AdminPage() {
           <Paper elevation={24} sx={{ p: 5, border: '1px solid rgba(255,255,255,0.1)' }}>
             <Box sx={{ textAlign: "center", mb: 4 }}>
               <Typography variant="overline" sx={{ letterSpacing: '0.2em', color: 'text.secondary' }}>Access Restricted</Typography>
-              <Typography variant="h4" fontWeight="bold">Admin Portal</Typography>
+              <Typography variant="h4" sx={{ fontWeight: "bold" }}>Admin Portal</Typography>
             </Box>
             
             <form onSubmit={handleLogin}>
@@ -218,7 +218,7 @@ export default function AdminPage() {
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 6 }}>
           <Box>
             <Typography variant="overline" sx={{ letterSpacing: '0.2em', color: 'text.secondary' }}>Dashboard</Typography>
-            <Typography variant="h3" fontWeight="900">Portfolio Admin</Typography>
+            <Typography variant="h3" sx={{ fontWeight: 900 }}>Portfolio Admin</Typography>
           </Box>
           <Button startIcon={<LogoutIcon />} onClick={handleLogout} variant="outlined" color="error" sx={{ borderRadius: 50, px: 3 }}>
             Logout
@@ -243,8 +243,8 @@ export default function AdminPage() {
               {blogs.map((blog) => (
                 <Grid size={{ xs: 12, md: 6 }} key={blog._id}>
                   <Paper sx={{ p: 4, height: "100%", display: "flex", flexDirection: "column", border: '1px solid rgba(255,255,255,0.05)', transition: '0.2s', '&:hover': { borderColor: 'primary.main', transform: 'translateY(-4px)' } }}>
-                    <Typography variant="h5" fontWeight="bold" gutterBottom>{blog.title}</Typography>
-                    <Typography variant="caption" color="primary" display="block" mb={2}>
+                    <Typography variant="h5" gutterBottom sx={{ fontWeight: "bold" }}>{blog.title}</Typography>
+                    <Typography variant="caption" color="primary" sx={{ display: "block", mb: 2 }}>
                       {new Date(blog.createdAt).toLocaleDateString()}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" sx={{ flexGrow: 1, mb: 3, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
@@ -259,9 +259,9 @@ export default function AdminPage() {
               ))}
             </Grid>
 
-            <Dialog open={blogDialog} onClose={() => setBlogDialog(false)} fullWidth maxWidth="md" PaperProps={{ sx: { border: '1px solid rgba(255,255,255,0.1)' } }}>
+            <Dialog open={blogDialog} onClose={() => setBlogDialog(false)} fullWidth maxWidth="md" sx={{ '& .MuiDialog-paper': { border: '1px solid rgba(255,255,255,0.1)' } }}>
               <DialogTitle sx={{ pb: 1, pt: 3, px: 4 }}>
-                <Typography variant="h5" fontWeight="bold">{editingBlog ? "Edit Article" : "Draft New Article"}</Typography>
+                <Typography variant="h5" sx={{ fontWeight: "bold" }}>{editingBlog ? "Edit Article" : "Draft New Article"}</Typography>
               </DialogTitle>
               <DialogContent sx={{ px: 4, pb: 4 }}>
                 <TextField fullWidth margin="normal" label="Article Title" value={blogTitle} onChange={(e) => setBlogTitle(e.target.value)} variant="filled" />
@@ -291,7 +291,7 @@ export default function AdminPage() {
 
         {tab === 1 && (
           <Paper sx={{ p: 6, border: '1px solid rgba(255,255,255,0.05)' }}>
-            <Typography variant="h5" fontWeight="bold" gutterBottom>CV Link Configuration</Typography>
+            <Typography variant="h5" gutterBottom sx={{ fontWeight: "bold" }}>CV Link Configuration</Typography>
             <Typography variant="body1" color="text.secondary" sx={{ mb: 4, maxWidth: '600px' }}>
               Provide a direct link to your CV (e.g., Google Drive PDF link). This link will be used when visitors click &quot;Download CV&quot; on the main portfolio page.
             </Typography>
