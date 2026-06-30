@@ -183,6 +183,24 @@ export function BlogSection() {
                 Loading articles...
               </p>
             )}
+
+            {/* View All Blogs Button */}
+            <div className="mt-10 flex justify-center">
+              <Link
+                href="/blogs"
+                className="inline-flex items-center gap-3 rounded-full text-[0.7rem] font-black uppercase tracking-[0.28em] text-white transition hover:bg-white hover:text-black"
+                style={{
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  padding: "0.85rem 2.5rem",
+                }}
+              >
+                VIEW ALL BLOGS
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
