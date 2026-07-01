@@ -1,41 +1,21 @@
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open("aditya-portfolio-v1").then((cache) =>
-      cache.addAll([
-        "/",
-        "/manifest.webmanifest",
-        "/assets/hero-background.jpg",
-        "/assets/portfolio_3.jpg",
-      ]),
-    ),
-  );
+self.addEventListener('install', () => {
   self.skipWaiting();
 });
 
-self.addEventListener("activate", (event) => {
-  event.waitUntil(self.clients.claim());
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cache) => caches.delete(cache))
+      );
+    }).then(() => {
+      self.registration.unregister();
+      return self.clients.claim();
+    })
+  );
 });
 
-self.addEventListener("fetch", (event) => {
-  if (event.request.method !== "GET") {
-    return;
-  }
-
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-
-      return fetch(event.request)
-        .then((networkResponse) => {
-          const responseClone = networkResponse.clone();
-          caches.open("aditya-portfolio-v1").then((cache) => {
-            cache.put(event.request, responseClone);
-          });
-          return networkResponse;
-        })
-        .catch(() => caches.match("/"));
-    }),
-  );
+self.addEventListener('fetch', (event) => {
+  // Pass through all requests to network
+  return;
 });

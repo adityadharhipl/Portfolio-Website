@@ -2,6 +2,8 @@ import connectDB from "@/lib/db";
 import { Blog } from "@/models/Blog";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import BlogInteractions from "@/components/portfolio/BlogInteractions";
+import { headers } from "next/headers";
 
 export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -74,52 +76,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
           </article>
 
           {/* Right Column - Sidebar */}
-          <aside className="space-y-6">
-            
-            {/* Actions Widget */}
-            <div className="bg-[#11141b] rounded-[1.5rem] border border-white/10 p-6 shadow-2xl">
-              <h3 className="text-[0.65rem] font-black uppercase tracking-[0.4em] text-white/50 mb-6">ACTIONS</h3>
-              <div className="space-y-3">
-                <button className="w-full bg-white text-black font-black uppercase tracking-[0.2em] text-[0.7rem] py-3.5 rounded-full hover:bg-white/90 transition flex items-center justify-center gap-2">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
-                  LIKE (0)
-                </button>
-                <button className="w-full bg-[#15202B] text-white border border-white/10 font-black uppercase tracking-[0.2em] text-[0.7rem] py-3.5 rounded-full hover:bg-white/10 transition flex items-center justify-center gap-2">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-                  SHARE
-                </button>
-              </div>
-            </div>
-
-            {/* Comment Form Widget */}
-            <div className="bg-[#11141b] rounded-[1.5rem] border border-white/10 p-6 shadow-2xl">
-              <h3 className="text-[0.65rem] font-black uppercase tracking-[0.4em] text-white/50 mb-6">COMMENT</h3>
-              <form className="space-y-4">
-                <input 
-                  type="text" 
-                  placeholder="Your name" 
-                  className="w-full bg-[#0c1015] border border-white/10 rounded-[1rem] px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-white/30"
-                />
-                <textarea 
-                  placeholder="Write your comment..." 
-                  rows={4}
-                  className="w-full bg-[#0c1015] border border-white/10 rounded-[1rem] px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-white/30 resize-none"
-                ></textarea>
-                <button type="button" className="w-full bg-white text-black font-black uppercase tracking-[0.2em] text-[0.7rem] py-3.5 rounded-full hover:bg-white/90 transition">
-                  POST COMMENT
-                </button>
-              </form>
-            </div>
-
-            {/* Comments List Widget */}
-            <div className="bg-[#11141b] rounded-[1.5rem] border border-white/10 p-6 shadow-2xl">
-              <h3 className="text-[0.65rem] font-black uppercase tracking-[0.4em] text-white/50 mb-6">COMMENTS</h3>
-              <div className="text-sm text-white/50 text-center py-4">
-                No comments yet. Be the first to share your thoughts.
-              </div>
-            </div>
-
-          </aside>
+          <BlogInteractions 
+            blogId={blog._id.toString()} 
+            initialLikes={blog.likes || 0} 
+            initialComments={JSON.parse(JSON.stringify(blog.comments || []))}
+            blogUrl={typeof window !== 'undefined' ? window.location.href : `https://adityadhar.dev/blogs/${blog._id}`}
+          />
         </div>
       </div>
     </div>

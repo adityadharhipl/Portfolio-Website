@@ -41,7 +41,7 @@ export function BlogSection() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/blogs")
+    fetch("/api/blogs", { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.data && data.data.length > 0) {

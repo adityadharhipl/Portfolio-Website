@@ -4,6 +4,8 @@ export interface IBlog extends Document {
   title: string;
   content: string;
   imageUrl?: string;
+  likes: number;
+  comments: Array<{ name: string; text: string; createdAt: Date }>;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -22,6 +24,17 @@ const BlogSchema: Schema = new Schema(
     imageUrl: {
       type: String,
     },
+    likes: {
+      type: Number,
+      default: 0,
+    },
+    comments: [
+      {
+        name: { type: String, required: true },
+        text: { type: String, required: true },
+        createdAt: { type: Date, default: Date.now },
+      }
+    ],
   },
   {
     timestamps: true,

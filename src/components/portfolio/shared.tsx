@@ -108,6 +108,21 @@ export const skillGroups: Array<{ title: string; items: SkillItem[] }> = [
       { label: "SonarQube", kind: "glyph", glyph: "SQ", bg: "#15202B", fg: "#3b82f6" },
     ],
   },
+  {
+    title: "AI Tools",
+    items: [
+      { label: "ChatGPT", kind: "glyph", glyph: "CG", bg: "#15202B", fg: "#10b981" },
+      { label: "Claude", kind: "glyph", glyph: "CL", bg: "#15202B", fg: "#d97757" },
+      { label: "Google AI Studio", kind: "glyph", glyph: "GA", bg: "#15202B", fg: "#4285f4" },
+      { label: "GitHub Copilot", kind: "glyph", glyph: "CP", bg: "#15202B", fg: "#f3f4f6" },
+      { label: "Midjourney", kind: "glyph", glyph: "MJ", bg: "#15202B", fg: "#a855f7" },
+      { label: "OpenAI API", kind: "glyph", glyph: "OA", bg: "#15202B", fg: "#10b981" },
+      { label: "LangChain", kind: "glyph", glyph: "LC", bg: "#15202B", fg: "#3b82f6" },
+      { label: "Hugging Face", kind: "glyph", glyph: "HF", bg: "#15202B", fg: "#f59e0b" },
+      { label: "Vercel v0", kind: "glyph", glyph: "V0", bg: "#15202B", fg: "#e5e7eb" },
+      { label: "Cursor AI", kind: "glyph", glyph: "CR", bg: "#15202B", fg: "#38bdf8" },
+    ],
+  },
 ];
 
 export const portfolioProjects = [

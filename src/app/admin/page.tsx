@@ -62,6 +62,9 @@ export default function AdminPage() {
   const [blogImage, setBlogImage] = useState("");
   const [shareDialog, setShareDialog] = useState(false);
   const [shareUrl, setShareUrl] = useState("");
+  
+  const [deleteDialog, setDeleteDialog] = useState(false);
+  const [blogToDelete, setBlogToDelete] = useState<string | null>(null);
 
   // CV State
   const [cvUrl, setCvUrl] = useState("");
@@ -84,11 +87,13 @@ export default function AdminPage() {
   const fetchData = async () => {
     try {
       const [blogsRes, cvRes] = await Promise.all([
-        fetch("/api/blogs").then((r) => r.json()),
-        fetch("/api/cv").then((r) => r.json())
+        fetch("/api/blogs", { cache: "no-store" }),
+        fetch("/api/cv", { cache: "no-store" })
       ]);
-      if (blogsRes.success) setBlogs(blogsRes.data);
-      if (cvRes.success && cvRes.data) setCvUrl(cvRes.data.url);
+      const blogsData = await blogsRes.json();
+      const cvData = await cvRes.json();
+      if (blogsData.success) setBlogs(blogsData.data);
+      if (cvData.success && cvData.data) setCvUrl(cvData.data.url);
     } catch (e) {
       console.error(e);
     }
@@ -133,6 +138,19 @@ export default function AdminPage() {
     }
   };
 
+  const handleCvUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && file.type === "application/pdf") {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCvUrl(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    } else if (file) {
+      alert("Please upload a valid PDF document.");
+    }
+  };
+
   const handleSaveBlog = async () => {
     const url = editingBlog ? `/api/blogs/${editingBlog._id}` : "/api/blogs";
     const method = editingBlog ? "PUT" : "POST";
@@ -158,11 +176,21 @@ export default function AdminPage() {
     }
   };
 
-  const handleDeleteBlog = async (id: string) => {
-    if (!confirm("Are you sure?")) return;
-    const res = await fetch(`/api/blogs/${id}`, { method: "DELETE" });
+  const confirmDeleteBlog = (id: string) => {
+    setBlogToDelete(id);
+    setDeleteDialog(true);
+  };
+
+  const handleDeleteBlog = async () => {
+    if (!blogToDelete) return;
+    
+    const res = await fetch(`/api/blogs/${blogToDelete}`, { method: "DELETE" });
     const data = await res.json();
-    if (data.success) fetchData();
+    if (data.success) {
+      fetchData();
+      setDeleteDialog(false);
+      setBlogToDelete(null);
+    }
   };
 
   const handleUpdateCv = async () => {
@@ -253,16 +281,21 @@ export default function AdminPage() {
               {blogs.map((blog) => (
                 <Grid size={{ xs: 12, md: 6 }} key={blog._id}>
                   <Paper sx={{ p: 4, height: "100%", display: "flex", flexDirection: "column", border: '1px solid rgba(255,255,255,0.05)', transition: '0.2s', '&:hover': { borderColor: 'primary.main', transform: 'translateY(-4px)' } }}>
+                    {blog.imageUrl && (
+                      <Box sx={{ mb: 3, height: '150px', overflow: 'hidden', borderRadius: 2 }}>
+                        <img src={blog.imageUrl} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      </Box>
+                    )}
                     <Typography variant="h5" gutterBottom sx={{ fontWeight: "bold" }}>{blog.title}</Typography>
                     <Typography variant="caption" color="primary" sx={{ display: "block", mb: 2 }}>
-                      {new Date(blog.createdAt).toLocaleDateString()}
+                      {new Date(blog.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" sx={{ flexGrow: 1, mb: 3, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
                       {blog.content}
                     </Typography>
                     <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
                       <IconButton color="primary" onClick={() => openBlogDialog(blog)} sx={{ bgcolor: 'rgba(144, 202, 249, 0.1)' }}><EditIcon /></IconButton>
-                      <IconButton color="error" onClick={() => handleDeleteBlog(blog._id)} sx={{ bgcolor: 'rgba(244, 67, 54, 0.1)' }}><DeleteIcon /></IconButton>
+                      <IconButton color="error" onClick={() => confirmDeleteBlog(blog._id)} sx={{ bgcolor: 'rgba(244, 67, 54, 0.1)' }}><DeleteIcon /></IconButton>
                     </Box>
                   </Paper>
                 </Grid>
@@ -271,7 +304,7 @@ export default function AdminPage() {
 
             <Dialog open={blogDialog} onClose={() => setBlogDialog(false)} fullWidth maxWidth="md" sx={{ '& .MuiDialog-paper': { border: '1px solid rgba(255,255,255,0.1)' } }}>
               <DialogTitle sx={{ pb: 1, pt: 3, px: 4 }}>
-                <Typography variant="h5" sx={{ fontWeight: "bold" }}>{editingBlog ? "Edit Article" : "Draft New Article"}</Typography>
+                <Typography variant="h5" component="span" sx={{ fontWeight: "bold", display: 'block' }}>{editingBlog ? "Edit Article" : "Draft New Article"}</Typography>
               </DialogTitle>
               <DialogContent sx={{ px: 4, pb: 4 }}>
                 <TextField fullWidth margin="normal" label="Article Title" value={blogTitle} onChange={(e) => setBlogTitle(e.target.value)} variant="filled" />
@@ -298,7 +331,7 @@ export default function AdminPage() {
             </Dialog>
             <Dialog open={shareDialog} onClose={() => setShareDialog(false)} maxWidth="sm" fullWidth sx={{ '& .MuiDialog-paper': { border: '1px solid rgba(255,255,255,0.1)', textAlign: 'center', p: 3 } }}>
               <DialogTitle>
-                <Typography variant="h5" sx={{ fontWeight: "bold", color: "success.main" }}>Success!</Typography>
+                <Typography variant="h5" component="span" sx={{ fontWeight: "bold", color: "success.main", display: 'block' }}>Success!</Typography>
               </DialogTitle>
               <DialogContent>
                 <Typography variant="body1" sx={{ mb: 3 }}>
@@ -326,6 +359,21 @@ export default function AdminPage() {
                 <Button onClick={() => setShareDialog(false)} color="inherit">Maybe Later</Button>
               </DialogActions>
             </Dialog>
+
+            <Dialog open={deleteDialog} onClose={() => setDeleteDialog(false)} maxWidth="xs" fullWidth sx={{ '& .MuiDialog-paper': { border: '1px solid rgba(255,255,255,0.1)', textAlign: 'center', p: 2 } }}>
+              <DialogTitle>
+                <Typography variant="h6" component="span" sx={{ fontWeight: "bold", color: "error.main", display: 'block' }}>Delete Article?</Typography>
+              </DialogTitle>
+              <DialogContent>
+                <Typography variant="body1">
+                  Are you sure you want to permanently delete this blog post? This action cannot be undone.
+                </Typography>
+              </DialogContent>
+              <DialogActions sx={{ justifyContent: 'center', mt: 2, gap: 2 }}>
+                <Button onClick={() => setDeleteDialog(false)} color="inherit" variant="outlined" sx={{ px: 3 }}>Cancel</Button>
+                <Button onClick={handleDeleteBlog} color="error" variant="contained" sx={{ px: 3 }}>Delete</Button>
+              </DialogActions>
+            </Dialog>
           </Box>
         )}
 
@@ -333,11 +381,32 @@ export default function AdminPage() {
           <Paper sx={{ p: 6, border: '1px solid rgba(255,255,255,0.05)' }}>
             <Typography variant="h5" gutterBottom sx={{ fontWeight: "bold" }}>CV Link Configuration</Typography>
             <Typography variant="body1" color="text.secondary" sx={{ mb: 4, maxWidth: '600px' }}>
-              Provide a direct link to your CV (e.g., Google Drive PDF link). This link will be used when visitors click &quot;Download CV&quot; on the main portfolio page.
+              Provide a direct link to your CV or upload a PDF file directly. This will be used when visitors click &quot;Download CV&quot;.
             </Typography>
+            
+            <Box sx={{ mt: 3, mb: 4 }}>
+              <Button variant="outlined" component="label" startIcon={<CloudUploadIcon />} fullWidth sx={{ py: 3, borderStyle: 'dashed', borderWidth: 2, fontSize: '1.1rem' }}>
+                Upload PDF CV
+                <input type="file" hidden accept="application/pdf" onChange={handleCvUpload} />
+              </Button>
+            </Box>
+
+            <Typography variant="overline" sx={{ display: 'block', mb: 1, textAlign: 'center', color: 'text.secondary' }}>OR ENTER URL</Typography>
             <TextField fullWidth label="CV URL" value={cvUrl} onChange={(e) => setCvUrl(e.target.value)} margin="normal" variant="filled" />
-            {cvSuccess && <Typography color="success.main" variant="body2" sx={{ mt: 2, fontWeight: 'bold' }}>{cvSuccess}</Typography>}
-            <Button variant="contained" size="large" sx={{ mt: 4, px: 5, borderRadius: 50 }} onClick={handleUpdateCv}>Save CV Link</Button>
+            
+            {cvUrl && (cvUrl.startsWith("data:application/pdf") || cvUrl.endsWith(".pdf")) && (
+              <Box sx={{ mt: 4, height: '500px', width: '100%', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 2, overflow: 'hidden' }}>
+                <iframe src={cvUrl} width="100%" height="100%" style={{ border: 'none' }} title="CV Preview" />
+              </Box>
+            )}
+
+            {cvSuccess && <Typography color="success.main" variant="body1" sx={{ mt: 3, fontWeight: 'bold', textAlign: 'center' }}>{cvSuccess}</Typography>}
+            
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+              <Button variant="contained" size="large" sx={{ px: 6, py: 1.5, borderRadius: 50, fontSize: '1.1rem' }} onClick={handleUpdateCv}>
+                Save CV Link
+              </Button>
+            </Box>
           </Paper>
         )}
       </Container>
