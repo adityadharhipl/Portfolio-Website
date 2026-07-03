@@ -89,7 +89,6 @@ function SiteNav() {
     { label: "Skills", href: "#skills" },
     { label: "Portfolio", href: "#portfolio" },
     { label: "Blog", href: "#blog" },
-    { label: "Admin", href: "/admin" },
   ];
 
   return (
