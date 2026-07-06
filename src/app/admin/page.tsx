@@ -66,6 +66,18 @@ export default function AdminPage() {
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [blogToDelete, setBlogToDelete] = useState<string | null>(null);
 
+  // Project State
+  const [projects, setProjects] = useState<any[]>([]);
+  const [projectDialog, setProjectDialog] = useState(false);
+  const [editingProject, setEditingProject] = useState<any>(null);
+  const [projectTitle, setProjectTitle] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
+  const [projectImage, setProjectImage] = useState("");
+  const [projectUrl, setProjectUrl] = useState("");
+  
+  const [deleteProjectDialog, setDeleteProjectDialog] = useState(false);
+  const [projectToDelete, setProjectToDelete] = useState<string | null>(null);
+
   // CV State
   const [cvUrl, setCvUrl] = useState("");
   const [cvSuccess, setCvSuccess] = useState("");
@@ -86,14 +98,17 @@ export default function AdminPage() {
 
   const fetchData = async () => {
     try {
-      const [blogsRes, cvRes] = await Promise.all([
+      const [blogsRes, cvRes, projectsRes] = await Promise.all([
         fetch("/api/blogs", { cache: "no-store" }),
-        fetch("/api/cv", { cache: "no-store" })
+        fetch("/api/cv", { cache: "no-store" }),
+        fetch("/api/projects", { cache: "no-store" })
       ]);
       const blogsData = await blogsRes.json();
       const cvData = await cvRes.json();
+      const projectsData = await projectsRes.json();
       if (blogsData.success) setBlogs(blogsData.data);
       if (cvData.success && cvData.data) setCvUrl(cvData.data.url);
+      if (projectsData.success) setProjects(projectsData.data);
     } catch (e) {
       console.error(e);
     }
@@ -215,6 +230,61 @@ export default function AdminPage() {
     setBlogDialog(true);
   };
 
+  const handleProjectImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProjectImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSaveProject = async () => {
+    const url = editingProject ? `/api/projects/${editingProject._id}` : "/api/projects";
+    const method = editingProject ? "PUT" : "POST";
+    
+    const res = await fetch(url, {
+      method,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: projectTitle, description: projectDescription, imageUrl: projectImage, url: projectUrl }),
+    });
+    
+    const data = await res.json();
+    if (data.success) {
+      setProjectDialog(false);
+      fetchData();
+      setTab(2); // Redirect to showing projects
+    }
+  };
+
+  const confirmDeleteProject = (id: string) => {
+    setProjectToDelete(id);
+    setDeleteProjectDialog(true);
+  };
+
+  const handleDeleteProject = async () => {
+    if (!projectToDelete) return;
+    
+    const res = await fetch(`/api/projects/${projectToDelete}`, { method: "DELETE" });
+    const data = await res.json();
+    if (data.success) {
+      fetchData();
+      setDeleteProjectDialog(false);
+      setProjectToDelete(null);
+    }
+  };
+
+  const openProjectDialog = (project: any = null) => {
+    setEditingProject(project);
+    setProjectTitle(project ? project.title : "");
+    setProjectDescription(project ? project.description : "");
+    setProjectImage(project ? project.imageUrl : "");
+    setProjectUrl(project ? project.url : "");
+    setProjectDialog(true);
+  };
+
   if (isAuthenticated === null) {
     return (
       <ThemeProvider theme={darkTheme}>
@@ -267,6 +337,7 @@ export default function AdminPage() {
           <Tabs value={tab} onChange={(_, v) => setTab(v)} variant="fullWidth" indicatorColor="primary" textColor="primary">
             <Tab label="Manage Blogs" sx={{ fontWeight: 'bold', py: 2 }} />
             <Tab label="CV Link" sx={{ fontWeight: 'bold', py: 2 }} />
+            <Tab label="Project Management" sx={{ fontWeight: 'bold', py: 2 }} />
           </Tabs>
         </Paper>
 
@@ -408,6 +479,86 @@ export default function AdminPage() {
               </Button>
             </Box>
           </Paper>
+        )}
+
+        {tab === 2 && (
+          <Box>
+            <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 4 }}>
+              <Button variant="contained" startIcon={<AddIcon />} onClick={() => openProjectDialog()} sx={{ px: 4, py: 1.5, borderRadius: 50 }}>
+                Add New Project
+              </Button>
+            </Box>
+            <Grid container spacing={4}>
+              {projects.map((project) => (
+                <Grid size={{ xs: 12, md: 6 }} key={project._id}>
+                  <Paper sx={{ p: 4, height: "100%", display: "flex", flexDirection: "column", border: '1px solid rgba(255,255,255,0.05)', transition: '0.2s', '&:hover': { borderColor: 'primary.main', transform: 'translateY(-4px)' } }}>
+                    {project.imageUrl && (
+                      <Box sx={{ mb: 3, height: '150px', overflow: 'hidden', borderRadius: 2 }}>
+                        <img src={project.imageUrl} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      </Box>
+                    )}
+                    <Typography variant="h5" gutterBottom sx={{ fontWeight: "bold" }}>{project.title}</Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ flexGrow: 1, mb: 2, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+                      {project.description}
+                    </Typography>
+                    {project.url && (
+                      <Typography variant="body2" color="primary" sx={{ mb: 3, wordBreak: 'break-all' }}>
+                        <a href={project.url} target="_blank" rel="noopener noreferrer">{project.url}</a>
+                      </Typography>
+                    )}
+                    <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
+                      <IconButton color="primary" onClick={() => openProjectDialog(project)} sx={{ bgcolor: 'rgba(144, 202, 249, 0.1)' }}><EditIcon /></IconButton>
+                      <IconButton color="error" onClick={() => confirmDeleteProject(project._id)} sx={{ bgcolor: 'rgba(244, 67, 54, 0.1)' }}><DeleteIcon /></IconButton>
+                    </Box>
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
+
+            <Dialog open={projectDialog} onClose={() => setProjectDialog(false)} fullWidth maxWidth="md" sx={{ '& .MuiDialog-paper': { border: '1px solid rgba(255,255,255,0.1)' } }}>
+              <DialogTitle sx={{ pb: 1, pt: 3, px: 4 }}>
+                <Typography variant="h5" component="span" sx={{ fontWeight: "bold", display: 'block' }}>{editingProject ? "Edit Project" : "Add New Project"}</Typography>
+              </DialogTitle>
+              <DialogContent sx={{ px: 4, pb: 4 }}>
+                <TextField fullWidth margin="normal" label="Project Title" value={projectTitle} onChange={(e) => setProjectTitle(e.target.value)} variant="filled" />
+                <TextField fullWidth margin="normal" label="Project URL" value={projectUrl} onChange={(e) => setProjectUrl(e.target.value)} variant="filled" />
+                
+                <Box sx={{ mt: 3, mb: 2 }}>
+                  <Button variant="outlined" component="label" startIcon={<CloudUploadIcon />} fullWidth sx={{ py: 2, borderStyle: 'dashed', borderWidth: 2 }}>
+                    Upload Project Image
+                    <input type="file" hidden accept="image/*" onChange={handleProjectImageUpload} />
+                  </Button>
+                </Box>
+                
+                {projectImage && (
+                  <Box sx={{ mb: 3, display: "flex", justifyContent: "center", bgcolor: 'rgba(0,0,0,0.5)', p: 2, borderRadius: 2 }}>
+                    <img src={projectImage} alt="Preview" style={{ maxWidth: '100%', maxHeight: '250px', objectFit: 'contain', borderRadius: '8px' }} />
+                  </Box>
+                )}
+                
+                <TextField fullWidth margin="normal" label="Description" multiline rows={6} value={projectDescription} onChange={(e) => setProjectDescription(e.target.value)} variant="filled" />
+              </DialogContent>
+              <DialogActions sx={{ px: 4, pb: 3 }}>
+                <Button onClick={() => setProjectDialog(false)} color="inherit" sx={{ mr: 1 }}>Cancel</Button>
+                <Button onClick={handleSaveProject} variant="contained" color="primary" sx={{ px: 4 }}>Save</Button>
+              </DialogActions>
+            </Dialog>
+
+            <Dialog open={deleteProjectDialog} onClose={() => setDeleteProjectDialog(false)} maxWidth="xs" fullWidth sx={{ '& .MuiDialog-paper': { border: '1px solid rgba(255,255,255,0.1)', textAlign: 'center', p: 2 } }}>
+              <DialogTitle>
+                <Typography variant="h6" component="span" sx={{ fontWeight: "bold", color: "error.main", display: 'block' }}>Delete Project?</Typography>
+              </DialogTitle>
+              <DialogContent>
+                <Typography variant="body1">
+                  Are you sure you want to permanently delete this project? This action cannot be undone.
+                </Typography>
+              </DialogContent>
+              <DialogActions sx={{ justifyContent: 'center', mt: 2, gap: 2 }}>
+                <Button onClick={() => setDeleteProjectDialog(false)} color="inherit" variant="outlined" sx={{ px: 3 }}>Cancel</Button>
+                <Button onClick={handleDeleteProject} color="error" variant="contained" sx={{ px: 3 }}>Delete</Button>
+              </DialogActions>
+            </Dialog>
+          </Box>
         )}
       </Container>
     </ThemeProvider>
